@@ -166,7 +166,7 @@ app.get("/api/leads", async (req, res) => {
   try {
 
     const [rows] = await db.execute(
-      "SELECT * FROM leads ORDER BY id ASC"
+      "SELECT * FROM leads ORDER BY id DESC"
     );
 
     return res.status(200).json(rows);
