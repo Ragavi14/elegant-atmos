@@ -99,17 +99,17 @@ export default function AdminDashboard({
       <aside style={styles.sidebar}>
 
         <div style={styles.branding}>
-          Elegant Atmos
+          {/* Elegant Atmos */}
+          <img alt="Elegant Atmos" src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png" style={styles.logo}/>
         </div>
 
-        <div style={styles.subBrand}>
+        {/* <div style={styles.subBrand}>
           Maintainer Panel
-        </div>
+        </div> */}
 
         <div style={styles.menuActive}>
           Customer Leads
         </div>
-
         <button
           onClick={() => {
 
@@ -287,19 +287,21 @@ const styles = {
   },
 
   sidebar: {
-    width: '260px',
+    width: '400px',
     backgroundColor: '#5F733C',
     padding: '30px 20px',
     display: 'flex',
     flexDirection: 'column',
     boxSizing: 'border-box'
   },
-
+  logo: {
+    height: '80px',
+  },
   branding: {
     color: '#fff',
     fontSize: '28px',
     fontWeight: '700',
-    marginBottom: '5px'
+    marginBottom: '5px',
   },
 
   subBrand: {
