@@ -62,13 +62,16 @@ app.post("/api/admin/login", async (req, res) => {
         role: adminUser.role
       }
     });
+
   } catch (error) {
+
     console.error("LOGIN ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: "Internal Server Error"
     });
+
   }
 });
 
@@ -77,6 +80,7 @@ app.post("/api/admin/login", async (req, res) => {
 ========================= */
 
 app.post("/api/contact", async (req, res) => {
+
   console.log("FORM DATA:", req.body);
 
   const { fullName, phone, email, message } = req.body;
@@ -96,6 +100,7 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
+
     await db.execute(
       `INSERT INTO leads
       (full_name, phone, email, message)
@@ -119,6 +124,7 @@ app.post("/api/contact", async (req, res) => {
       subject: "New Site Visit Request",
       html: `
         <h2>New Lead Received</h2>
+
         <p><strong>Name:</strong> ${fullName}</p>
         <p><strong>Phone:</strong> ${phone}</p>
         <p><strong>Email:</strong> ${email}</p>
@@ -132,13 +138,16 @@ app.post("/api/contact", async (req, res) => {
       success: true,
       message: "Lead submitted successfully"
     });
+
   } catch (error) {
+
     console.error("CONTACT ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: error.message
     });
+
   }
 });
 
@@ -147,17 +156,24 @@ app.post("/api/contact", async (req, res) => {
 ========================= */
 
 app.get("/api/leads", async (req, res) => {
+
   try {
-    const [rows] = await db.execute("SELECT * FROM leads ORDER BY id DESC");
+
+    const [rows] = await db.execute(
+      "SELECT * FROM leads ORDER BY id DESC"
+    );
 
     return res.status(200).json(rows);
+
   } catch (error) {
+
     console.log("LEADS ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: "Server Error"
     });
+
   }
 });
 
@@ -166,21 +182,29 @@ app.get("/api/leads", async (req, res) => {
 ========================= */
 
 app.delete("/api/leads/:id", async (req, res) => {
+
   try {
+
     const { id } = req.params;
 
-    await db.execute("DELETE FROM leads WHERE id = ?", [id]);
+    await db.execute(
+      "DELETE FROM leads WHERE id = ?",
+      [id]
+    );
 
     return res.status(200).json({
       success: true
     });
+
   } catch (error) {
+
     console.log("DELETE ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: "Server Error"
     });
+
   }
 });
 
@@ -188,10 +212,20 @@ app.delete("/api/leads/:id", async (req, res) => {
    REACT BUILD
 ========================= */
 
-app.use(express.static(path.join(__dirname, "../build")));
+app.use(
+  express.static(
+    path.join(__dirname, "..", "build")
+  )
+);
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build/index.html"));
+/* =========================
+   REACT ROUTES FIX
+========================= */
+
+app.use((req, res) => {
+  res.sendFile(
+    path.join(__dirname, "..", "build", "index.html")
+  );
 });
 
 /* =========================
