@@ -1,503 +1,354 @@
-import React, {
-  useEffect,
-  useState
-} from 'react';
-
-import {
-  useNavigate
-} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 /* =========================
    DASHBOARD
 ========================= */
+export default function AdminDashboard({ onLogout }) {
+  const navigate = useNavigate();
+  const [leads, setLeads] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [selectedLeadId, setSelectedLeadId] = useState(null);
 
-export default function AdminDashboard({
-  onLogout
-}) {
+  const openDeleteModal = (id) => {
+    setSelectedLeadId(id);
+    setShowDeleteModal(true);
+  };
 
-    const navigate = useNavigate();
-
-    const [leads, setLeads] = useState([]);
-
-    const [loading, setLoading] = useState(true);
-
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-    const [selectedLeadId, setSelectedLeadId] = useState(null);
-    const openDeleteModal = (id) => {
-
-        setSelectedLeadId(id);
-
-        setShowDeleteModal(true);
-    };
   /* =========================
      FETCH LEADS
   ========================= */
-
   useEffect(() => {
-
     fetch('/api/leads')
-
       .then(res => res.json())
-
       .then(data => {
-
-        console.log(data);
-
         setLeads(data);
-
         setLoading(false);
       })
-
       .catch(err => {
-
-        console.log(err);
-
+        console.error(err);
         setLoading(false);
       });
-
   }, []);
 
- const handleDelete = async () => {
-
+  /* =========================
+     DELETE LEAD
+  ========================= */
+  const handleDelete = async () => {
     try {
+      const response = await fetch(`/api/leads/${selectedLeadId}`, {
+        method: 'DELETE'
+      });
+      const data = await response.json();
 
-        const response = await fetch(
-            `/api/leads/${selectedLeadId}`,
-            {
-                method: 'DELETE'
-            }
-        );
-
-        const data = await response.json();
-
-        if (data.success) {
-
-            setLeads(
-                leads.filter(
-                    lead => lead.id !== selectedLeadId
-                )
-            );
-
-            setShowDeleteModal(false);
-
-            setSelectedLeadId(null);
-        }
-
+      if (data.success) {
+        setLeads(leads.filter(lead => lead.id !== selectedLeadId));
+        setShowDeleteModal(false);
+        setSelectedLeadId(null);
+      }
     } catch (error) {
-
-        console.log(error);
+      console.error(error);
     }
-};
+  };
 
   return (
+    <>
+      {/* GLOBAL FONTS, CSS RESET AND CSS VARIABLES */}
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-    <div style={styles.wrapper}>
-
-      {/* SIDEBAR */}
-
-      <aside style={styles.sidebar}>
-
-        <div style={styles.branding}>
-          {/* Elegant Atmos */}
-          <img alt="Elegant Atmos" src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png" style={styles.logo}/>
-        </div>
-
-        {/* <div style={styles.subBrand}>
-          Maintainer Panel
-        </div> */}
-
-        <div style={styles.menuActive}>
-          Customer Leads
-        </div>
-        <button
-          onClick={() => {
-
-            onLogout();
-
-            navigate('/admin');
-          }}
-          style={styles.logoutBtn}
-        >
-         Logout
-        </button>
-
-      </aside>
-
-      {/* MAIN WORKSPACE */}
-
-      <main style={styles.workspace}>
-
-        <div style={styles.pageHeader}>
-
-          <h1 style={styles.pageTitle}>
-            Customer Leads
-          </h1>
-
-          <div style={styles.badge}>
-            {leads.length} Total
-          </div>
-
-        </div>
-
-        {
-          loading ? (
-
-            <div style={styles.loading}>
-              Loading Leads...
-            </div>
-
-          ) : (
-
-            <div style={styles.tableWrapper}>
-
-              <table style={styles.table}>
-
-                <thead>
-
-                    <tr>
-
-                        <th style={styles.th}>Name</th>
-
-                        <th style={styles.th}>Phone</th>
-
-                        <th style={styles.th}>Email</th>
-
-                        <th style={styles.th}>Message</th>
-
-                        <th style={styles.th}>Date</th>
-
-                        <th style={styles.th}>Action</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody>
-
-                  {
-                    leads.map((lead) => (
-
-                      <tr
-                        key={lead.id}
-                      >
-
-                        <td style={styles.td}>
-                          {lead.full_name}
-                        </td>
-
-                        <td style={styles.td}>
-                          {lead.phone}
-                        </td>
-
-                        <td style={styles.td}>
-                          {lead.email}
-                        </td>
-
-                        <td style={styles.td}>
-                          {lead.message || '-'}
-                        </td>
-
-                        <td style={styles.td}>
-                          {
-                            new Date(
-                              lead.created_at
-                            ).toLocaleString()
-                          }
-                        </td>
-                        <td style={styles.td}>
-
-                            <button
-                                onClick={() => openDeleteModal(lead.id)}
-                                style={styles.deleteBtn}
-                                >
-                                Delete
-                            </button>
-
-                         </td>
-
-                      </tr>
-                    ))
-                  }
-
-                </tbody>
-
-              </table>
-
-            </div>
-          )
+        :root {
+          --green: #5F733C;
+          --green-dark: #3d4f27;
+          --green-light: #8fa86a;
+          --bg-light: #f7f5ef;
+          --text-dark: #1a1a1a;
+          --text-muted: #6b7553;
+          --danger: #dc2626;
         }
 
-      </main>
-      {
-  showDeleteModal && (
+        .dashboard-wrapper {
+          width: 100%;
+          min-height: 100vh;
+          display: flex;
+          background-color: var(--bg-light);
+          font-family: 'Poppins', sans-serif;
+        }
 
-    <div style={styles.modalOverlay}>
+        .dashboard-sidebar {
+          width: 500px;
+          background-color: var(--green);
+          padding: 30px 20px;
+          display: flex;
+          flex-direction: column;
+          box-sizing: border-box;
+        }
 
-      <div style={styles.modalBox}>
+        .sidebar-logo {
+          height: '80px';
+        }
 
-        <h3 style={styles.modalTitle}>
-          Delete Lead
-        </h3>
+        .sidebar-branding {
+          color: #fff;
+          font-size: 28px;
+          font-weight: 700;
+          margin-bottom: 5px;
+        }
 
-        <p style={styles.modalText}>
-          Are you sure you want to permanently delete this lead?
-        </p>
+        .menu-active {
+          background-color: var(--green-dark);
+          color: #fff;
+          padding: 14px;
+          borderRadius: 10px;
+          font-weight: 600;
+          margin-bottom: auto; /* Pushes the logout button to the bottom */
+        }
 
-        <div style={styles.modalActions}>
+        .logout-btn {
+          width: 100%;
+          padding: 14px;
+          background-color: var(--text-dark);
+          color: #fff;
+          border: none;
+          border-radius: 10px;
+          cursor: pointer;
+          font-weight: 700;
+          transition: opacity 0.2s;
+          font-family: 'Poppins', sans-serif;
+        }
+        .logout-btn:hover { opacity: 0.9; }
+
+        .dashboard-workspace {
+          flex-grow: 1;
+          padding: 40px;
+          overflow-x: auto;
+        }
+
+        .page-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 30px;
+        }
+
+        .page-title {
+          font-size: 32px;
+          color: var(--text-dark);
+          margin: 0;
+        }
+
+        .badge-count {
+          background-color: var(--green-light);
+          color: #fff;
+          padding: 10px 18px;
+          border-radius: 999px;
+          font-weight: 700;
+        }
+
+        .table-wrapper {
+          background-color: #fff;
+          border-radius: 18px;
+          overflow: hidden;
+          box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+        }
+
+        .leads-table {
+          width: 100%;
+          border-collapse: collapse;
+        }
+
+        .leads-table th {
+          background-color: var(--green);
+          color: #fff;
+          padding: 18px;
+          text-align: left;
+          font-size: 14px;
+        }
+
+        .leads-table td {
+          padding: 18px;
+          border-bottom: 1px solid #edf1e7;
+          color: var(--text-dark);
+          font-size: 14px;
+          vertical-align: top;
+        }
+
+        .loading-text {
+          color: var(--text-muted);
+          font-size: 18px;
+        }
+
+        .delete-btn {
+          background-color: var(--danger);
+          color: #fff;
+          border: none;
+          padding: 8px 14px;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 600;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          background-color: rgba(0,0,0,0.5);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 999999;
+        }
+
+        .modal-box {
+          width: 420px;
+          background-color: #fff;
+          border-radius: 14px;
+          padding: 30px;
+          box-sizing: border-box;
+          box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .modal-title {
+          margin: 0 0 14px 0;
+          font-size: 24px;
+          color: var(--text-dark);
+          font-weight: 700;
+        }
+
+        .modal-text {
+          margin: 0 0 25px 0;
+          color: var(--text-muted);
+          line-height: 1.6;
+        }
+
+        .modal-actions {
+          display: flex;
+          justify-content: flex-end;
+          gap: 12px;
+        }
+
+        .cancel-btn {
+          padding: 10px 18px;
+          border: 1px solid #d1d5db;
+          background-color: #fff;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+
+        .confirm-delete-btn {
+          padding: 10px 18px;
+          background-color: var(--danger);
+          color: #fff;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          font-weight: 600;
+        }
+      `}</style>
+
+      {/* DASHBOARD HTML RENDER */}
+      <div className="dashboard-wrapper">
+        
+        {/* SIDEBAR */}
+        <aside className="dashboard-sidebar">
+          <div className="sidebar-branding">
+            <img alt="Elegant Atmos" src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png" style={{ height: '80px' }}/>
+          </div>
+
+          <div className="menu-active">
+            Customer Leads
+          </div>
 
           <button
-            onClick={() => setShowDeleteModal(false)}
-            style={styles.cancelBtn}
+            onClick={() => {
+              onLogout();
+              navigate('/admin');
+            }}
+            className="logout-btn"
           >
-            Cancel
+            Logout
           </button>
+        </aside>
 
-          <button
-            onClick={handleDelete}
-            style={styles.confirmDeleteBtn}
-          >
-            Yes, Delete
-          </button>
+        {/* MAIN WORKSPACE */}
+        <main className="dashboard-workspace">
+          <div className="page-header">
+            <h1 className="page-title">Customer Leads</h1>
+            <div className="badge-count">{leads.length} Total</div>
+          </div>
 
-        </div>
+          {loading ? (
+            <div className="loading-text">Loading Leads...</div>
+          ) : (
+            <div className="table-wrapper">
+              <table className="leads-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Message</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {leads.map((lead) => (
+                    <tr key={lead.id}>
+                      <td>{lead.full_name}</td>
+                      <td>{lead.phone}</td>
+                      <td>{lead.email}</td>
+                      <td>{lead.message || '-'}</td>
+                      <td>{new Date(lead.created_at).toLocaleString()}</td>
+                      <td>
+                        <button
+                          onClick={() => openDeleteModal(lead.id)}
+                          className="delete-btn"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </main>
+
+        {/* CONFIRMATION MODAL */}
+        {showDeleteModal && (
+          <div className="modal-overlay">
+            <div className="modal-box">
+              <h3 className="modal-title">Delete Lead</h3>
+              <p className="modal-text">
+                Are you sure you want to permanently delete this lead?
+              </p>
+              <div className="modal-actions">
+                <button
+                  onClick={() => setShowDeleteModal(false)}
+                  className="cancel-btn"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={handleDelete}
+                  className="confirm-delete-btn"
+                >
+                  Yes, Delete
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
       </div>
-
-    </div>
-  )
-}
-
-    </div>
+    </>
   );
 }
-
-/* =========================
-   STYLES
-========================= */
-
-const styles = {
-
-  wrapper: {
-    width: '100%',
-    minHeight: '100vh',
-    display: 'flex',
-    backgroundColor: '#f7f5ef',
-    fontFamily: "'Poppins', sans-serif"
-  },
-
-  sidebar: {
-    width: '400px',
-    backgroundColor: '#5F733C',
-    padding: '30px 20px',
-    display: 'flex',
-    flexDirection: 'column',
-    boxSizing: 'border-box'
-  },
-  logo: {
-    height: '80px',
-  },
-  branding: {
-    color: '#fff',
-    fontSize: '28px',
-    fontWeight: '700',
-    marginBottom: '5px',
-  },
-
-  subBrand: {
-    color: '#dfe8cf',
-    marginBottom: '40px',
-    fontSize: '14px'
-  },
-
-  menuActive: {
-    backgroundColor: '#3d4f27',
-    color: '#fff',
-    padding: '14px',
-    borderRadius: '10px',
-    fontWeight: '600',
-    marginBottom: 'auto'
-  },
-
-  logoutBtn: {
-    width: '100%',
-    padding: '14px',
-    backgroundColor: '#1a1a1a',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    fontWeight: '700'
-  },
-
-  workspace: {
-    flexGrow: 1,
-    padding: '40px',
-    overflowX: 'auto'
-  },
-
-  pageHeader: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: '30px'
-  },
-
-  pageTitle: {
-    fontSize: '32px',
-    color: '#1a1a1a',
-    margin: 0
-  },
-
-  badge: {
-    backgroundColor: '#8fa86a',
-    color: '#fff',
-    padding: '10px 18px',
-    borderRadius: '999px',
-    fontWeight: '700'
-  },
-
-  tableWrapper: {
-    backgroundColor: '#fff',
-    borderRadius: '18px',
-    overflow: 'hidden',
-    boxShadow: '0 8px 30px rgba(0,0,0,0.05)'
-  },
-
-  table: {
-    width: '100%',
-    borderCollapse: 'collapse'
-  },
-
-  th: {
-    backgroundColor: '#5F733C',
-    color: '#fff',
-    padding: '18px',
-    textAlign: 'left',
-    fontSize: '14px'
-  },
-
-  td: {
-    padding: '18px',
-    borderBottom: '1px solid #edf1e7',
-    color: '#1a1a1a',
-    fontSize: '14px',
-    verticalAlign: 'top'
-  },
-
-  loading: {
-    color: '#6b7553',
-    fontSize: '18px'
-  },
-  deleteBtn: {
-    backgroundColor: "#dc2626",
-    color: "#fff",
-    border: "none",
-    padding: "8px 14px",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontWeight: "600"
-  },
-  modalOverlay: {
-
-    position: "fixed",
-
-    top: 0,
-
-    left: 0,
-
-    width: "100vw",
-
-    height: "100vh",
-
-    backgroundColor: "rgba(0,0,0,0.5)",
-
-    display: "flex",
-
-    justifyContent: "center",
-
-    alignItems: "center",
-
-    zIndex: 999999
-},
-
-modalBox: {
-
-    width: "420px",
-
-    backgroundColor: "#fff",
-
-    borderRadius: "14px",
-
-    padding: "30px",
-
-    boxSizing: "border-box",
-
-    boxShadow: "0 20px 40px rgba(0,0,0,0.2)"
-},
-
-modalTitle: {
-
-    margin: 0,
-
-    marginBottom: "14px",
-
-    fontSize: "24px",
-
-    color: "#1a1a1a",
-
-    fontWeight: "700"
-},
-
-modalText: {
-
-    margin: 0,
-
-    marginBottom: "25px",
-
-    color: "#6b7553",
-
-    lineHeight: "1.6"
-},
-
-modalActions: {
-
-    display: "flex",
-
-    justifyContent: "flex-end",
-
-    gap: "12px"
-},
-
-cancelBtn: {
-
-    padding: "10px 18px",
-
-    border: "1px solid #d1d5db",
-
-    backgroundColor: "#fff",
-
-    borderRadius: "8px",
-
-    cursor: "pointer",
-
-    fontWeight: "600"
-},
-
-confirmDeleteBtn: {
-
-    padding: "10px 18px",
-
-    backgroundColor: "#5F733C",
-
-    color: "#fff",
-
-    border: "none",
-
-    borderRadius: "8px",
-
-    cursor: "pointer",
-
-    fontWeight: "600"
-},
-};

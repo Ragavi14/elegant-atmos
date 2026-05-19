@@ -46,20 +46,20 @@ export default function AdminLogin({ isAdmin, setIsAdmin }) {
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 99999999, // Enforces absolute visibility over any fixed landing page headers
-    fontFamily: 'sans-serif'
+    fontFamily:"'Poppins', sans-serif"
   }}>
     <form onSubmit={handleLoginSubmit} style={styles.card}>
       <h2 style={styles.title}>ELEGANT ATMOS </h2>
       {error && <p style={styles.error}>{error}</p>}
       <div style={styles.group}>
-        <label style={styles.label}>Admin Account</label>
+        <label style={styles.label}>Username</label>
         <input type="text" style={styles.input} value={username} onChange={e => setUsername(e.target.value)} required />
       </div>
       <div style={styles.group}>
-        <label style={styles.label}>Security Token / Password</label>
+        <label style={styles.label}>Password</label>
         <input type="password" style={styles.input} value={password} onChange={e => setPassword(e.target.value)} required />
       </div>
-      <button type="submit" style={styles.btn}>Verify & Access</button>
+      <button type="submit" style={styles.btn}>Login</button>
     </form>
   </div>
 );
@@ -72,6 +72,6 @@ const styles = {
   group: { marginBottom:'15px' },
   label: { display:'block', marginBottom:'5px', fontSize:'14px', fontWeight:'600', color:'#475569' },
   input: { width:'100%', padding:'10px', boxSizing:'border-box', border:'1px solid #cbd5e1', borderRadius:'6px', color:'#000', fontSize:'15px' },
-  btn: { width:'100%', padding:'12px', backgroundColor:'#5F733C', color:'#fff', border:'none', borderRadius:'6px', cursor:'pointer', fontWeight:'bold', fontSize:'16px' },
+  btn: { fontFamily:"'Poppins', sans-serif", width:'100%', padding:'12px', backgroundColor:'#5F733C', color:'#fff', border:'none', borderRadius:'6px', cursor:'pointer', fontWeight:'bold', fontSize:'16px' },
   error: { color:'#b91c1c', backgroundColor:'#fef2f2', padding:'10px', borderRadius:'6px', fontSize:'13px', textAlign:'center', marginBottom:'15px' }
 };
