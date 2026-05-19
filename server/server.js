@@ -122,7 +122,7 @@ app.post("/api/contact", async (req, res) => {
       service: "gmail",
       auth: {
         user: "ragavibud@gmail.com",
-        pass: "PASTE_NEW_GMAIL_APP_PASSWORD_HERE"
+        pass: "harr grrw czzt wiru"
       }
     });
 
@@ -168,7 +168,7 @@ app.get("/api/leads", async (req, res) => {
   try {
 
     const [rows] = await db.execute(
-      "SELECT * FROM leads ORDER BY id DESC"
+      "SELECT * FROM leads ORDER BY id ASC"
     );
 
     return res.status(200).json(rows);
