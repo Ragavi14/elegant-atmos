@@ -77,7 +77,7 @@ export default function AdminDashboard({ onLogout }) {
         }
 
         .dashboard-sidebar {
-          width: 500px;
+          width: 15%;
           background-color: var(--green);
           padding: 30px 20px;
           display: flex;
@@ -120,6 +120,7 @@ export default function AdminDashboard({ onLogout }) {
         .logout-btn:hover { opacity: 0.9; }
 
         .dashboard-workspace {
+          width: 85%;
           flex-grow: 1;
           padding: 40px;
           overflow-x: auto;
