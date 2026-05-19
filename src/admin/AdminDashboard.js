@@ -283,7 +283,7 @@ const styles = {
     minHeight: '100vh',
     display: 'flex',
     backgroundColor: '#f7f5ef',
-    fontFamily: 'sans-serif'
+    fontFamily: "'Poppins', sans-serif"
   },
 
   sidebar: {

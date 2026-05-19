@@ -93,6 +93,7 @@ app.post("/api/contact", async (req, res) => {
 
   const { fullName, phone, email, message } = req.body;
 
+  // 1. Validation
   if (!fullName || !phone || !email) {
     return res.status(400).json({
       success: false,
@@ -108,7 +109,7 @@ app.post("/api/contact", async (req, res) => {
   }
 
   try {
-
+    // 2. Store data in your local database
     await db.execute(
       `INSERT INTO leads
       (full_name, phone, email, message)
@@ -118,44 +119,42 @@ app.post("/api/contact", async (req, res) => {
 
     console.log("DATABASE INSERT SUCCESS");
 
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "ragavibud@gmail.com",
-        pass: "harr grrw czzt wiru"
-      }
-    });
+    // 3. Forward data to the Client's API Link
+    // const clientApiUrl = "PASTE_THE_CLIENTS_API_LINK_HERE"; 
+    
+    // const clientResponse = await fetch(clientApiUrl, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+        
+    //   },
+    //   body: JSON.stringify({
+    //     fullName: fullName,
+    //     phone: phone,
+    //     email: email,
+    //     message: message || ""
+    //   })
+    // });
 
-    await transporter.sendMail({
-      from: '"Elegant Atmos" <ragavibud@gmail.com>',
-      to: "ragavi@buddigital.com",
-      subject: "New Site Visit Request",
-      html: `
-        <h2>New Lead Received</h2>
+    // if (clientResponse.ok) {
+    //   console.log("FORWARDED TO CLIENT API SUCCESSFULLY");
+    // } else {
+    //   console.error("CLIENT API REJECTED DATA:", clientResponse.statusText);
+    // }
 
-        <p><strong>Name:</strong> ${fullName}</p>
-        <p><strong>Phone:</strong> ${phone}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Message:</strong> ${message || ""}</p>
-      `
-    });
-
-    console.log("EMAIL SENT SUCCESS");
-
+    // 4. Send response back to your website frontend
     return res.status(200).json({
       success: true,
-      message: "Lead submitted successfully"
+      message: "Lead submitted and forwarded successfully"
     });
 
   } catch (error) {
-
     console.error("CONTACT ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: error.message
     });
-
   }
 });
 
