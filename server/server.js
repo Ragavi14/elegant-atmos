@@ -23,7 +23,15 @@ db.getConnection()
    MIDDLEWARE
 ========================= */
 
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type"]
+}));
+
+app.options("*", cors());
+
 app.use(express.json());
 
 /* =========================
