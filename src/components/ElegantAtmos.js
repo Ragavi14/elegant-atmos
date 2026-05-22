@@ -401,7 +401,6 @@ const inputStyle = {
   fontSize: "14px",
   outline: "none"
 };
-const [showModal, setShowModal] = useState(false);
 
 const [modalSource, setModalSource] = useState("");
   return (
@@ -478,7 +477,7 @@ const [modalSource, setModalSource] = useState("");
         .mobile-btn:last-child { border-bottom: none; }
 
         /* Hero */
-        .hero { position: relative; height: 100vh; min-height: 680px; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
+        .hero { position: relative; height: 100vh; min-height: 800px; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
         .hero-bg-pattern { position: absolute; inset: 0; opacity: 1; background: url('http://kevnitserver.com/projects/elegant_builders/exterior2.jpg') center/cover no-repeat; }
         .hero-bg-pattern::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,18,6,0.82) 0%, rgba(10,18,6,0.65) 45%, rgba(10,18,6,0.35) 100%); }
         .hero-content { position: relative; z-index: 2; }
@@ -1171,7 +1170,7 @@ const [modalSource, setModalSource] = useState("");
               minHeight: "250px"
             }}>
               {/* Replace with your local layout illustration image path if needed */}
-              <div className="why-img-wrap" onClick={() => setLightbox("../images/master-plan-map.png")}>
+              <div className="why-img-wrap" onClick={() => setLightbox("../images/master-map.png")}>
               <img 
                 src="../images/map.png" 
                 alt="Location Roadmap" 
