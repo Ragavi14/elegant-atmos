@@ -295,6 +295,7 @@ export default function AdminDashboard({ onLogout }) {
                     <th>Phone</th>
                     <th>Email</th>
                     <th>Message</th>
+                    <th>Form Type</th>
                     <th>Date</th>
                     <th>Action</th>
                   </tr>
@@ -306,6 +307,7 @@ export default function AdminDashboard({ onLogout }) {
                       <td>{lead.phone}</td>
                       <td>{lead.email}</td>
                       <td>{lead.message || '-'}</td>
+                      <td>{lead.form_type || '-'}</td>
                       <td>{new Date(lead.created_at).toLocaleString()}</td>
                       <td>
                         <button

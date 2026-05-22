@@ -95,7 +95,8 @@ app.post("/api/admin/login", async (req, res) => {
 app.post("/api/contact", async (req, res) => {
   // console.log("FORM DATA RECEIVED:", req.body);
 
-  const { fullName, phone, email, message } = req.body;
+  // Destructure formType along with your other fields
+  const { fullName, phone, email, message, formType } = req.body;
 
   // 1. Validation
   if (!fullName || !phone || !email) {
@@ -112,15 +113,19 @@ app.post("/api/contact", async (req, res) => {
     });
   }
 
+  const assignedFormType = (formType && formType.trim() !== "") ? formType.trim() : "generic";
+
   try {
-    // 2. Store data in your local database
+    /* ========================================================
+       1. STORE DATA IN LOCAL DATABASE (With form_type column)
+       ======================================================== */
     await db.execute(
-      `INSERT INTO leads (full_name, phone, email, message) VALUES (?, ?, ?, ?)`,
-      [fullName.trim(), phone, email, message || ""]
+      `INSERT INTO leads (full_name, phone, email, message, form_type) VALUES (?, ?, ?, ?, ?)`,
+      [fullName.trim(), phone, email, message || "", assignedFormType]
     );
     // console.log("Step 1: Local DB Insert Success");
 
-    // 3. Authenticate with Salesforce using our updated function
+    // 2. Authenticate with Salesforce using our updated function
     const tokenData = await getSalesforceAccessToken();
     // console.log("Step 2: Salesforce Token Acquired");
 
@@ -139,7 +144,9 @@ app.post("/api/contact", async (req, res) => {
       lastName = nameParts[0] || "Lead";
     }
 
-    // 4. Map data payload to match Salesforce fields
+    /* ========================================================
+       3. MAP DATA PAYLOAD TO MATCH SALESFORCE FIELDS
+       ======================================================== */
     const salesforcePayload = {
       FirstName: firstName,
       LastName: lastName,

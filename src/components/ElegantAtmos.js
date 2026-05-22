@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-
-// ── Elegant Atmos – Full Website ──────────────────────────────────────────────
-// Brand: #5F733C (olive-green) + cream white + deep charcoal
-// Fonts: Playfair Display (display) + DM Sans (body)
+import {useNavigate}  from 'react-router-dom';
 
 const GALLERY = {
   Exterior: [
@@ -24,11 +21,11 @@ const GALLERY = {
 const NAV_LINKS = ["Overview", "Location", "Amenities", "Gallery", "Sustainability", "Contact"];
 
 const HIGHLIGHTS = [
-  { num: "2", label: "Towers", sub: "G+14 Floors" },
-  { num: "136", label: "Perfect Units", sub: "Freewall Homes" },
+  // { num: "2", label: "Towers", sub: "G+14 Floors" },
+  // { num: "136", label: "Perfect Units", sub: "Freewall Homes" },
   { num: "3 & 3.5", label: "BHK", sub: "Configurations" },
   { num: "1.8", label: "Acres", sub: "Of Everything You Desire" },
-  { num: "50+", label: "Amenities", sub: "Across All Levels" },
+  // { num: "50+", label: "Amenities", sub: "Across All Levels" },
   { num: "10K", label: "Sq.ft Clubhouse", sub: "Premium Facilities" },
 ];
 
@@ -39,13 +36,10 @@ const FEATURE_ICONS = {
       <circle cx="16" cy="15" r="2.5" stroke="#5F733C" strokeWidth="1.6" fill="none"/>
       <path d="M16 6v2M16 24v2M6 15H4M28 15h-2" stroke="#5F733C" strokeWidth="1.4" strokeLinecap="round"/>
     </svg>
+   
   ),
   light: (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-      <circle cx="16" cy="13" r="5.5" stroke="#5F733C" strokeWidth="1.8" fill="none"/>
-      <path d="M16 3v2M16 21v2M5 13H3M29 13h-2M8.2 5.2l1.4 1.4M22.4 19.4l1.4 1.4M5.2 20.8l1.4-1.4M24.4 7l1.4-1.4" stroke="#5F733C" strokeWidth="1.6" strokeLinecap="round"/>
-      <path d="M12 24h8M13 27h6" stroke="#5F733C" strokeWidth="1.8" strokeLinecap="round"/>
-    </svg>
+     <img src="../images/forest.png" width="32" height="32" alt="Forest"/>
   ),
   privacy: (
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -64,10 +58,10 @@ const FEATURE_ICONS = {
 };
 
 const FEATURES = [
-  { iconKey: "vaastu", title: "Vaastu-Synced Perfection", desc: "Each home is built with strict adherence to Vaastu principles, flowing with harmony, positivity, fresh air and perfect ventilation." },
-  { iconKey: "light", title: "Light & Air That Flows In", desc: "Large windows and spacious balconies let light and breeze in from at least three sides, overlooking lush green GKVK views." },
-  { iconKey: "privacy", title: "Private Space Before Your Space", desc: "Each home has a private and exclusive foyer and corridor — a moment of privacy before arrival, a buffer of calm before the day resumes." },
-  { iconKey: "location", title: "The Optimal Location", desc: "A prime location in Yelahanka with excellent connectivity, commercial establishments close at hand and opportunities stretching into the future." },
+  { iconKey: "vaastu", title: "Vaastu-Compliant, Corner Residences", desc: "Homes designed to open on all sides for natural breeze, daylight, and harmonious energy flow. " },
+  { iconKey: "light", title: "Forest-Front Sustainable Living", desc: "Directly facing the GKVK Green Zone for unblocked greenery and cleaner surroundings. An IGBC Silver-Rated project featuring rainwater harvesting and solar power." },
+  { iconKey: "privacy", title: "Privacy with Freewall Homes", desc: "No shared walls between units ensures more light, ventilation, and the quiet of an independent home." },
+  { iconKey: "location", title: "Low-Density Boutique Community", desc: "Only 136 homes with just 5 units per floor for a more private experience." },
 ];
 
 const GREEN_ZONES = [
@@ -161,7 +155,6 @@ const FLOOR_PLANS = [
   { label: "3 BHK – Type B", area: "~1,720 sq.ft", rooms: ["Living & Dining", "Master Bedroom (Attached)", "Bedroom 2", "Bedroom 3", "Kitchen + Utility", "3 Bathrooms", "3 Balconies"] },
   { label: "3.5 BHK – Type C", area: "~2,050 sq.ft", rooms: ["Living & Dining", "Master Bedroom (Lounge)", "Bedroom 2", "Bedroom 3", "Study / 0.5 Room", "Kitchen + Utility", "4 Bathrooms", "3 Balconies"] },
 ];
-
 function FloorPlanCard({ plan }) {
 
   return (
@@ -175,23 +168,23 @@ function FloorPlanCard({ plan }) {
           <rect width="300" height="220" fill="#faf9f5" />
           <rect x="10" y="10" width="280" height="200" fill="none" stroke="#5F733C" strokeWidth="3" rx="3" />
           <rect x="10" y="10" width="130" height="90" fill="#e8f0dc" stroke="#5F733C" strokeWidth="1.5" />
-          <text x="75" y="58" textAnchor="middle" fontSize="9" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Living &amp; Dining</text>
+          <text x="75" y="58" textAnchor="middle" fontSize="9" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Living &amp; Dining</text>
           <rect x="140" y="10" width="150" height="90" fill="#dce8f0" stroke="#5F733C" strokeWidth="1.5" />
-          <text x="215" y="58" textAnchor="middle" fontSize="9" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Master Bedroom</text>
+          <text x="215" y="58" textAnchor="middle" fontSize="9" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Master Bedroom</text>
           <rect x="10" y="100" width="85" height="70" fill="#e8dce0" stroke="#5F733C" strokeWidth="1.5" />
-          <text x="52" y="138" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Bed 2</text>
+          <text x="52" y="138" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Bed 2</text>
           <rect x="95" y="100" width="75" height="70" fill="#dce8dc" stroke="#5F733C" strokeWidth="1.5" />
-          <text x="132" y="138" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Bed 3</text>
+          <text x="132" y="138" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Bed 3</text>
           <rect x="170" y="100" width="75" height="50" fill="#f0ead8" stroke="#5F733C" strokeWidth="1.5" />
-          <text x="207" y="128" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Kitchen</text>
+          <text x="207" y="128" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Kitchen</text>
           <rect x="245" y="100" width="45" height="50" fill="#e8e8dc" stroke="#5F733C" strokeWidth="1.5" />
-          <text x="267" y="128" textAnchor="middle" fontSize="7" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Utility</text>
+          <text x="267" y="128" textAnchor="middle" fontSize="7" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Utility</text>
           <rect x="10" y="170" width="175" height="40" fill="#c8d8b0" stroke="#5F733C" strokeWidth="1.5" rx="2" />
-          <text x="97" y="194" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Balcony</text>
+          <text x="97" y="194" textAnchor="middle" fontSize="8" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Balcony</text>
           <rect x="185" y="150" width="50" height="40" fill="#d8e0f0" stroke="#5F733C" strokeWidth="1" />
-          <text x="210" y="173" textAnchor="middle" fontSize="7" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Bath</text>
+          <text x="210" y="173" textAnchor="middle" fontSize="7" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Bath</text>
           <rect x="235" y="150" width="55" height="40" fill="#d8e0f0" stroke="#5F733C" strokeWidth="1" />
-          <text x="262" y="173" textAnchor="middle" fontSize="7" fill="#3d4f27" fontFamily="DM Sans, sans-serif">Bath</text>
+          <text x="262" y="173" textAnchor="middle" fontSize="7" fill="#3d4f27" fontFamily="DM Sans, DM Sans, sans-serif">Bath</text>
           <circle cx="280" cy="25" r="12" fill="#5F733C22" stroke="#5F733C" strokeWidth="1" />
           <text x="280" y="29" textAnchor="middle" fontSize="10" fill="#5F733C" fontWeight="bold">N</text>
         </svg>
@@ -207,7 +200,25 @@ function FloorPlanCard({ plan }) {
     </div>
   );
 }
+const BUILDER_STATS = [
+  { label: "Trusted Since", num: "2004" },
+  { label: "Projects Delivered", num: "50+" },
+  { label: "Happy Customers", num: "16,000+" },
+  { label: "Sq. Ft. Built & Delivered", num: "3.5 Million" },
+  { label: "Sq. Ft. Upcoming", num: "3 Million" },
+  { label: "Value Appreciated", num: "80%" },
+];
 
+const AWARDS = [
+  { title: "Realty Plus", year: "2023", desc: "Lifetime Achievement Award" },
+  { title: "Economic Times Edge", year: "2025", desc: "Best realty Brands" },
+  { title: "Realty Plus", year: "2024", desc: "CXO of the year" },
+  { title: "Zee Business", year: "2025", desc: "Most Innovative Luxury project of the year" },
+  { title: "Realty Plus", year: "2024", desc: "Published as south india's most promising brand" },
+  { title: "Zee Business", year: "2024", desc: "Most Adorable luxury project of the year" },
+  { title: "WBR CORP", year: "2024", desc: "Notable Real Estate Developer of the year" },
+  { title: "Realty Plus", year: "2024", desc: "Best Residential project of the year" },
+];
 export default function ElegantAtmos() {
   const [galleryTab, setGalleryTab] = useState("Exterior");
   const [lightbox, setLightbox] = useState(null);
@@ -219,6 +230,22 @@ export default function ElegantAtmos() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+ 
+useEffect(() => {
+  // Set a timer to trigger the popup after 5000 milliseconds (5 seconds)
+  const autoPopupTimer = setTimeout(() => {
+    // This checks if the user hasn't already manually opened a modal
+    setModalSource((currentSource) => {
+      if (!currentSource) {
+        return "popup"; // Opens the "Book a Site Visit" variation automatically
+      }
+      return currentSource;
+    });
+  }, 5000);
+
+  // Clean up the timer if the user navigates away before 5 seconds passes
+  return () => clearTimeout(autoPopupTimer);
+}, []); // Empty dependency array means this runs exactly once when the page loads
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -232,13 +259,14 @@ const [formData, setFormData] = useState({
   fullName: "",
   phone: "",
   email: "",
-  message: ""
+  message: "",
+  formType: ""
 });
 
   const [loading, setLoading] = useState(false);
 const [success, setSuccess] = useState("");
 const [error, setError] = useState("");
-
+const navigate = useNavigate();
 const handleChange = (e) => {
   const { name, value } = e.target;
 
@@ -260,67 +288,122 @@ const handlePhoneChange = (e) => {
   setError("");
 };
 
-const handleSubmit = async (e) => {
+const handleSubmit = async (e, source = "generic") => {
   e.preventDefault();
 
   setSuccess("");
   setError("");
 
+  // 1. Validation Checks
   if (!formData.fullName.trim()) {
     setError("Full Name is required");
+    setTimeout(() => setError(""), 3000);
     return;
   }
 
   const phoneRegex = /^[6-9]\d{9}$/;
-
   if (!phoneRegex.test(formData.phone)) {
     setError("Please enter a valid 10-digit mobile number.");
+    setTimeout(() => setError(""), 3000);
     return;
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
   if (!emailRegex.test(formData.email.trim())) {
     setError("Enter a valid email address");
+    setTimeout(() => setError(""), 3000);
     return;
   }
 
   setLoading(true);
 
   try {
+    // 2. Fetch API Request
     const response = await fetch("/api/contact", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        ...formData,
+        fullName: formData.fullName.trim(),
+        phone: formData.phone,
         email: formData.email.trim(),
-        fullName: formData.fullName.trim()
+        message: formData.message || "",
+        formType: source
       })
     });
 
     const data = await response.json();
 
     if (data.success) {
-      setSuccess("Request submitted successfully!");
+      let openedFile = false; // Tracking flag to prevent accidental redirects
 
+      // 3. Dynamic PDF Handling
+      if (source === "brochure") {
+        window.open(
+          "https://kevnitserver.com/projects/elegant_builders/Elegant_atmos_Brochure.pdf", 
+          "_blank", 
+          "noopener,noreferrer"
+        );
+        openedFile = true;
+      } else if (source === "generic") {
+        window.open(
+          "./images/Elegant-Atmos-Floor-Plans-and-Cost-Sheet.pdf", 
+          "_blank", 
+          "noopener,noreferrer"
+        );
+        openedFile = true;
+      }
+
+      // 4. Reset input text fields cleanly
       setFormData({
         fullName: "",
         phone: "",
         email: "",
-        message: ""
+        message: "",
+        formType: source
       });
+
+      // 5. Cleanly reset tracking state to close the modal layout instantly
+      if (typeof setModalSource === "function") {
+        setModalSource(""); 
+      }
+
+      // 6. Redirection Logic Condition
+      if (openedFile) {
+        // Show an in-page overlay success notice since they are staying on the page
+        setSuccess("Thank you! Opening your files in a new tab...");
+        setTimeout(() => setSuccess(""), 4000);
+      } else {
+        // 👈 ONLY redirects to /thank-you if no PDF was launched (e.g. contact footer layouts)
+        navigate('/thank-you');
+      }
+
     } else {
       setError(data.message || "Something went wrong");
+      setTimeout(() => setError(""), 3000);
     }
   } catch (error) {
     setError("Server error. Please try again later.");
+    setTimeout(() => setError(""), 3000);
   }
 
   setLoading(false);
 };
+const inputStyle = {
+  width: "100%",
+  boxSizing: "border-box",
+  background: "#2a3d24", // Dark green matched pill tone
+  border: "1px solid #2a3d24",
+  borderRadius: "50px",
+  padding: "12px 20px",
+  color: "#fff",
+  fontSize: "14px",
+  outline: "none"
+};
+const [showModal, setShowModal] = useState(false);
 
+const [modalSource, setModalSource] = useState("");
   return (
     <>
       <style>{`
@@ -328,7 +411,7 @@ const handleSubmit = async (e) => {
 
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
-        body { font-family: 'DM Sans', sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
+        body { font-family: 'DM Sans', DM Sans, sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
 
         :root {
           --green: #5F733C;
@@ -345,14 +428,14 @@ const handleSubmit = async (e) => {
         .section-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; color: var(--charcoal); line-height: 1.15; }
         .section-subtitle { font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
 
-        section { padding: 100px 0; }
+        section { padding: 20px 0; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
         @media(max-width:768px) { .container { padding: 0 20px; } section { padding: 70px 0; } }
 
         .btn-primary {
           display: inline-flex; align-items: center; gap: 10px;
           background: var(--green); color: #fff; padding: 16px 36px; border-radius: 4px;
-          font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+          font-family: 'DM Sans', DM Sans, sans-serif; font-size: 14px; font-weight: 500;
           letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer;
           transition: background 0.3s, transform 0.2s; text-decoration: none;
         }
@@ -361,7 +444,7 @@ const handleSubmit = async (e) => {
         .btn-outline {
           display: inline-flex; align-items: center; gap: 10px;
           background: transparent; color: var(--green); padding: 14px 32px; border-radius: 4px;
-          font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+          font-family: 'DM Sans', DM Sans, sans-serif; font-size: 14px; font-weight: 500;
           letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--green);
           cursor: pointer; transition: all 0.3s; text-decoration: none;
         }
@@ -379,7 +462,7 @@ const handleSubmit = async (e) => {
         .nav-btn {
           color: rgba(255,255,255,0.88); font-size: 13px; letter-spacing: 0.1em;
           text-transform: uppercase; font-weight: 500; background: none; border: none;
-          cursor: pointer; transition: color 0.2s; font-family: 'DM Sans', sans-serif; padding: 0;
+          cursor: pointer; transition: color 0.2s; font-family: 'DM Sans', DM Sans, sans-serif; padding: 0;
         }
         .nav-btn:hover { color: #fff; }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
@@ -390,7 +473,7 @@ const handleSubmit = async (e) => {
           display: block; color: #fff; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
           font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
           background: none; border-left: none; border-right: none; border-top: none;
-          width: 100%; text-align: left; font-family: 'DM Sans', sans-serif;
+          width: 100%; text-align: left; font-family: 'DM Sans', DM Sans, sans-serif;
         }
         .mobile-btn:last-child { border-bottom: none; }
 
@@ -398,7 +481,7 @@ const handleSubmit = async (e) => {
         .hero { position: relative; height: 100vh; min-height: 680px; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
         .hero-bg-pattern { position: absolute; inset: 0; opacity: 1; background: url('http://kevnitserver.com/projects/elegant_builders/exterior2.jpg') center/cover no-repeat; }
         .hero-bg-pattern::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,18,6,0.82) 0%, rgba(10,18,6,0.65) 45%, rgba(10,18,6,0.35) 100%); }
-        .hero-content { position: relative; z-index: 2; max-width: 700px; }
+        .hero-content { position: relative; z-index: 2; }
         .hero-tag {
           display: inline-flex; align-items: center; gap: 7px;
           background: rgba(95,115,60,0.25); border: 1px solid rgba(95,115,60,0.5);
@@ -407,16 +490,17 @@ const handleSubmit = async (e) => {
         }
         .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 6vw, 5.5rem); font-weight: 700; color: #fff; line-height: 1.05; margin-bottom: 12px; }
         .hero-title em { font-style: italic; color: #a8c476; }
-        .hero-tagline { font-family: 'Playfair Display', serif; font-style: italic; color: rgba(255,255,255,0.65); font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 40px; max-width: 520px; }
-        .hero-stats { display: flex; gap: 40px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 36px; margin-top: 36px; }
+        .hero-tagline {  font-style: italic; color: rgba(255,255,255,0.65); font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 40px; max-width: 686px; }
+        .hero-tagline span{font-size: 35px; font-weight: bold;}
+        .hero-stats { display: flex; gap: 135px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 36px; margin-top: 36px; }
         .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #a8c476; }
-        .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
+        .hero-stat-label { font-size: 15px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
         .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; animation: bounce 2s infinite; }
         @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
         /* Highlights grid */
         .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--charcoal); }
-        @media(max-width:600px) { .highlights-grid { grid-template-columns: repeat(2,1fr); } }
+        @media(max-width:600px) { .green-highlights-banner { grid-template-columns: 1fr !important; } }
         .highlight-cell { background: var(--cream); padding: 44px 32px; text-align: center; transition: background 0.3s; }
         .highlight-cell:hover { background: var(--green); }
         .highlight-cell:hover .hl-num { color: #fff; }
@@ -436,7 +520,7 @@ const handleSubmit = async (e) => {
         .feature-desc { font-size: 14px; line-height: 1.7; color: #666; }
 
         /* Location */
-        .location-section { background: var(--charcoal); }
+        .location-section { background: var(--charcoal); padding: 80px 0px; }
         .location-section .section-title { color: #fff; }
         .location-section .section-subtitle { color: var(--green-light); }
         .green-zones { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
@@ -459,9 +543,9 @@ const handleSubmit = async (e) => {
         .amenity-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
 
         /* Gallery */
-        .gallery-section { background: var(--cream); }
+        .gallery-section { background: var(--cream); padding: 60px 0px; }
         .gallery-tabs { display: flex; gap: 4px; background: #e8e4dc; border-radius: 8px; padding: 4px; margin-bottom: 36px; flex-wrap: wrap; }
-        .gallery-tab { flex: 1; min-width: 110px; padding: 12px 20px; border-radius: 6px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; background: transparent; color: #666; transition: all 0.25s; font-family: 'DM Sans', sans-serif; }
+        .gallery-tab { flex: 1; min-width: 110px; padding: 12px 20px; border-radius: 6px; font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; border: none; background: transparent; color: #666; transition: all 0.25s; font-family: 'DM Sans', DM Sans, sans-serif; }
         .gallery-tab.active { background: var(--green); color: #fff; }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
         .gallery-img-wrap { aspect-ratio: 4/3; overflow: hidden; border-radius: 10px; cursor: zoom-in; position: relative; }
@@ -472,7 +556,7 @@ const handleSubmit = async (e) => {
         .floorplan-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 28px; }
 
         /* Sustainability */
-        .sustain-section { background: var(--green-dark); }
+        .sustain-section { background: var(--green-dark); padding: 60px 0px;}
         .sustain-section .section-title { color: #fff; }
         .sustain-section .section-subtitle { color: var(--green-light); }
         .sustain-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 24px; }
@@ -484,7 +568,7 @@ const handleSubmit = async (e) => {
         .sustain-desc { font-size: 13.5px; color: rgba(255,255,255,0.72); line-height: 1.7; }
 
         /* Specs */
-        .specs-section { background: #fff; }
+        .specs-section { background: #fff; padding: 60px 0px; }
         .specs-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 20px; }
         @media(max-width:800px) { .specs-grid { grid-template-columns: repeat(2,1fr); } }
         @media(max-width:480px) { .specs-grid { grid-template-columns: 1fr; } }
@@ -494,17 +578,17 @@ const handleSubmit = async (e) => {
         .spec-item:last-child { border: none; }
 
         /* About */
-        .about-section { background: linear-gradient(135deg, var(--charcoal) 0%, #1e2d12 100%); color: #fff; text-align: center; padding: 120px 0; }
+        .about-section { background: linear-gradient(135deg, var(--charcoal) 0%, #1e2d12 100%); color: #fff; text-align: center; padding: 60px 0; }
         .about-section .section-title { color: #fff; }
         .about-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 60px; padding-top: 60px; border-top: 1px solid rgba(255,255,255,0.15); }
         .about-stat-n { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: #a8c476; }
         .about-stat-l { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
 
         /* Contact */
-        .contact-section { background: var(--cream); }
+        .contact-section { background: var(--cream); padding: 60px 0px; }
         .contact-card { background: #fff; border-radius: 20px; padding: 60px; box-shadow: 0 24px 80px rgba(95,115,60,0.12); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
         @media(max-width:800px) { .contact-card { grid-template-columns: 1fr; gap: 40px; padding: 40px 28px; } }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 14px 18px; border: 1.5px solid #e0ddd5; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; background: var(--cream); transition: border-color 0.2s; outline: none; margin-bottom: 16px; color: var(--charcoal); }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 14px 18px; border: 1.5px solid #e0ddd5; border-radius: 8px; font-family: 'DM Sans', DM Sans, sans-serif; font-size: 14px; background: var(--cream); transition: border-color 0.2s; outline: none; margin-bottom: 16px; color: var(--charcoal); }
         .contact-form input:focus, .contact-form textarea:focus { border-color: var(--green); }
         .contact-form textarea { height: 120px; resize: none; }
         .contact-info-item { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
@@ -513,12 +597,13 @@ const handleSubmit = async (e) => {
         .contact-info-val { font-size: 14px; color: var(--charcoal); font-weight: 500; }
 
         /* Footer */
-        footer { background: var(--charcoal); color: rgba(255,255,255,0.65); padding: 60px 40px 36px; text-align: center; }
+        footer { background: var(--charcoal); color: rgba(255,255,255,0.65); padding: 60px 40px 36px; text-align: center;}
 
         /* Divider */
         .green-divider { height: 4px; background: linear-gradient(90deg, var(--green-dark), var(--green-light), var(--green-dark)); }
 
         /* Location responsive */
+        .why-img-wrap { overflow: hidden; border-radius: 10px; cursor: zoom-in; position: relative; }
         @media(max-width:800px) { .location-grid { grid-template-columns: 1fr !important; } }
 
         /* ── Mobile fixes ───────────────────────────────────────── */
@@ -528,8 +613,8 @@ const handleSubmit = async (e) => {
           .hero-content { max-width: 100%; }
           .hero-tag { font-size: 9px; padding: 4px 10px; margin-bottom: 16px; }
           .hero-title { font-size: 2.2rem !important; line-height: 1.1; margin-bottom: 10px; }
-          .hero-tagline { font-size: 0.95rem !important; margin-bottom: 28px; max-width: 100%; }
-          .hero-stats { gap: 20px; padding-top: 24px; margin-top: 24px; flex-wrap: nowrap; }
+          .hero-tagline { font-size: 0.95rem !important; margin-bottom: 28px; max-width: 100%; width: 222px;}
+          .hero-stats { gap: 20px; padding-top: 24px; margin-top: 24px; }
           .hero-stat-num { font-size: 1.1rem !important; }
           .hero-stat-label { font-size: 10px; }
           .hero-scroll { display: none; }
@@ -552,7 +637,72 @@ const handleSubmit = async (e) => {
           transition: transform 0.2s, box-shadow 0.2s;
           text-decoration: none;
         }
+          .phn-fab {
+          position: fixed; bottom: 96px; right: 102px; z-index: 800;
+          width: 48px; height: 48px; border-radius: 50%;
+          background: #25D366;
+          display: flex; align-items: center; justify-content: center;
+          box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+          transition: transform 0.2s, box-shadow 0.2s;
+          text-decoration: none;
+        }
         .wa-fab:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(37,211,102,0.55); }
+        @media (max-width: 991px) {
+        .stats-banner {
+          padding-bottom: 40px !important;
+        }
+        .stats-floating-grid {
+          position: relative !important;
+          bottom: 0 !important;
+          left: 0 !important;
+          right: 0 !important;
+          margin-top: 30px !important;
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+        .recognition-container {
+          margin-top: 60px !important;
+        }
+      }
+
+      @media (max-width: 600px) {
+        .stats-floating-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+        .awards-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+          gap: 30px 10px !important;
+        }
+      }
+      @media (max-width: 991px) {
+        .project-overview-section > .container {
+          grid-template-columns: 1fr !important;
+          gap: 50px !important;
+        }
+        .form-sticky-container {
+          position: relative !important;
+          top: 0 !important;
+          maxWidth: 500px;
+          width: 100%;
+          margin: 0 auto;
+          box-sizing: border-box;
+        }
+      }
+      @media (max-width: 640px) {
+        .features-grid {
+          grid-template-columns: 1fr !important;
+        }
+      }
+        @media (max-width: 768px) {
+  .footer-inline-form {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 15px !important;
+    padding: 0 10px;
+  }
+  .footer-inline-form input {
+    width: 100% !important;
+  }
+}
       `}</style>
 
       {/* Lightbox */}
@@ -566,11 +716,16 @@ const handleSubmit = async (e) => {
       {/* NAV */}
       <nav style={{ background: navBg, boxShadow: navShadow }}>
         <div className="nav-inner">
+          <div>
           <img
             src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
             alt="Elegant Atmos"
             style={{ height: 44, objectFit: "contain" }}
           />
+          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", marginLeft: '20px', }}/>
+          </div>
+         
+          
           <ul className="nav-links">
             {NAV_LINKS.map((l) => (
               <li key={l}>
@@ -593,24 +748,31 @@ const handleSubmit = async (e) => {
 
       {/* HERO */}
       <section className="hero" id="overview">
-  <div className="hero-bg-pattern" />
-  <div className="hero-content fade-up">
+        <div className="hero-bg-pattern" />
+          <div className="hero-content fade-up">
             <div className="hero-tag">
               <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M5 1C3.3 1 2 2.3 2 4c0 2.5 3 6 3 6s3-3.5 3-6c0-1.7-1.3-3-3-3z" fill="#b8cc94"/><circle cx="5" cy="4" r="1" fill="#3d4f27"/></svg>
               Yelahanka, Bengaluru — Facing GKVK
             </div>
             <h1 className="hero-title">
-              A Whole<br />World of <em>Worth</em>
+              Private. Palatial.<br/> Perfectly<em> Green.</em> 
+              {/* A Whole<br />World of <em>Worth</em> */}
             </h1>
             <p className="hero-tagline">
-              Freewall homes at the edge of Bengaluru's greenest paradise — where compromising was never part of the plan.
+             Discover North Bengaluru’s only Freewall homes where your walls—and your views—are yours alone. 136 limited-edition homes <span>starting from ₹1.8 Cr*</span>
             </p>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-              <button className="btn-primary" onClick={() => scrollTo("contact")}>Schedule a Visit →</button>
-              <button className="btn-outline" style={{ color: "#a8c476", borderColor: "#a8c476" }} onClick={() => scrollTo("gallery")}>View Gallery</button>
-            </div>
+              <button className="btn-primary" onClick={() => scrollTo("contact")}>Schedule a Site Visit →</button>
+              {/* <button className="btn-outline" style={{ color: "#a8c476", borderColor: "#a8c476" }} onClick={() => scrollTo("gallery")}>View Gallery</button> */}
+            <button  
+              className="btn-outline"  
+              style={{ color: "#a8c476", borderColor: "#a8c476" }}  
+              onClick={() => setModalSource("generic")} // 👈 Changed from setShowModal(true)
+            > 
+              Get Floor Plans & Price Sheet 
+            </button>            </div>
             <div className="hero-stats">
-              {[{ num: "2 Towers", sub: "G+14 Floors" }, { num: "136 Units", sub: "Freewall Homes" }, { num: "50+ Amenities", sub: "Across All Levels" }].map((s) => (
+              {[{ num: "2 Towers", sub: "G+14 Floors" }, { num: "136 Units", sub: "Freewall Homes" }, { num: "50+ Amenities", sub: "Across All Levels" }, { num: "IGBC Silver-Rated ", sub: "Green Community" }, { num: "RERA", sub: "Registered" }].map((s) => (
                 <div key={s.num}>
                   <div className="hero-stat-num">{s.num}</div>
                   <div className="hero-stat-label">{s.sub}</div>
@@ -634,28 +796,295 @@ const handleSubmit = async (e) => {
       </div>
 
       <div className="green-divider" />
+      <section className="builder-recognition-section" style={{ background: '#fff', paddingBottom: '60px', paddingTop: '0', }}>
+        {/* Green Stats Banner */}
+        <div className="stats-banner" style={{
+          background: '#3d4f27', 
+          padding: '60px 20px 80px 20px', 
+          textAlign: 'center',
+          position: 'relative'
+        }}>
+          <h2 style={{ color: '#fff', fontSize: '36px', marginBottom: '15px', fontWeight: 'normal', fontFamily: "'Playfair Display', serif" }}>
+            Elegant Builders &amp; Developers
+          </h2>
+          <p style={{ 
+            color: '#e0e0e0', 
+            maxWidth: '750px', 
+            margin: '0 auto 40px auto', 
+            fontSize: '15px', 
+            lineHeight: '1.6',
+            fontFamily: 'DM Sans, DM Sans, sans-serif'
+          }}>
+            Elegant Builders &amp; Developers has been shaping Bengaluru’s skyline for over two decades with homes built on trust, quality, design and long term value
+          </p>
 
-      {/* OVERVIEW */}
-      <section style={{ background: "#fff" }}>
-        <div className="container">
-          <div style={{ maxWidth: 680, marginBottom: 60 }}>
-            <p className="section-subtitle">The Project</p>
-            <h2 className="section-title">Your Whole World<br />of Worth Has…</h2>
-            <p style={{ marginTop: 20, fontSize: 15, lineHeight: 1.8, color: "#666", maxWidth: 560 }}>
-              Elegant Atmos is a project of freewall homes on the edge of Bengaluru's greenest paradise — homes with no shared walls, floating in the sky, open on almost every side to light, air, and the wild beauty outside.
-            </p>
+          {/* Floating Grid Container */}
+          <div className="stats-floating-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+            gap: '15px',
+            maxWidth: '1200px',
+            margin: '0 auto',
+            position: 'absolute',
+            left: '20px',
+            right: '20px',
+            bottom: '-40px',
+            zIndex: '10'
+          }}>
+            {BUILDER_STATS.map((stat, i) => (
+              <div key={i} style={{
+                background: '#fff',
+                borderRadius: '10px',
+                padding: '20px 15px',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
+                textAlign: 'center'
+              }}>
+                <div style={{ color: '#333', fontSize: '13px', marginBottom: '8px', fontFamily: 'DM Sans, sans-serif' }}>
+                  {stat.label}
+                </div>
+                <div style={{ color: '#111', fontSize: '24px', fontWeight: 'bold', fontFamily: 'DM Sans, sans-serif' }}>
+                  {stat.num}
+                </div>
+              </div>
+            ))}
           </div>
-          <div className="features-grid">
-            {FEATURES.map((f) => (
-              <div className="feature-card" key={f.title}>
-                <div className="feature-icon">{FEATURE_ICONS[f.iconKey]}</div>
-                <div className="feature-title">{f.title}</div>
-                <p className="feature-desc">{f.desc}</p>
+        </div>
+
+        {/* Awards & Recognition Container */}
+        <div className="recognition-container" style={{ 
+          maxWidth: '1200px', 
+          margin: '120px auto 0 auto', 
+          padding: '0 20px', 
+          textAlign: 'center' 
+        }}>
+          <h2 style={{ fontSize: '42px', color: '#111', marginBottom: '20px', fontWeight: 'bold', fontFamily: "'Playfair Display'", }}>
+            Recognised. Consistently.
+          </h2>
+          <p style={{ 
+            color: '#444', 
+            maxWidth: '800px', 
+            margin: '0 auto 50px auto', 
+            fontSize: '15px', 
+            lineHeight: '1.6',
+            fontFamily: 'DM Sans, sans-serif'
+          }}>
+            Over the years, our work has been recognised across industry platforms for consistency, design clarity, and commitment to quality. Each acknowledgement reflects an approach rooted in responsibility rather than scale.
+          </p>
+
+          {/* Awards Grid Grid */}
+          <div className="awards-grid" style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+            gap: '40px 20px',
+            justifyContent: 'center'
+          }}>
+            {AWARDS.map((award, i) => (
+              <div key={i} style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                alignItems: 'center', 
+                textAlign: 'center' 
+              }}>
+                {/* Laurel Wreath SVG Graphics Wrapper */}
+                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '5px' }}>
+                  {/* Left Wreath */}
+                  <img src="../images/left.svg" alt=""/>
+
+                  {/* Award Center Text */}
+                  <div style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                    <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#111', width: '98px', }}>{award.title}</div>
+                    <div style={{ fontSize: '14px', color: '#555', marginTop: '2px' }}>{award.year}</div>
+                  </div>
+
+                  {/* Right Wreath */}
+                   <img src="../images/right.svg" alt=""/>
+                </div>
+
+                {/* Award Sub Description */}
+                <p style={{ 
+                  fontSize: '12.5px', 
+                  color: '#666', 
+                  lineHeight: '1.4', 
+                  maxWidth: '180px', 
+                  margin: '5px 0 0 0',
+                  fontFamily: 'DM Sans, sans-serif'
+                }}>
+                  {award.desc}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
+      {/* OVERVIEW */}
+      {/* THE PROJECT & REGISTRATION SECTION */}
+    <section className="project-overview-section" style={{ background: "#fff", padding: "80px 0 0px" }}>
+      <div className="container" style={{
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "0 20px",
+        display: "grid",
+        gridTemplateColumns: "1fr 400px",
+        gap: "40px",
+        alignItems: "start"
+      }}>
+        
+        {/* Left Side: Content & 6 Feature Cards */}
+        <div>
+          
+          <div style={{ textAlign: "start", maxWidth: 620, margin: "0 0 10px" }}>
+            <p className="section-subtitle">The Project</p>
+            <h2 className="section-title"> Your Whole World<br />of Worth</h2>
+            <p style={{ marginTop: 18, fontSize: 15, color: "#666", lineHeight: 1.7 }}>
+              A 1.8-acre boutique community in Yelahanka offering a rare balance of city access and peaceful green living.
+            </p>
+          </div>
+
+          {/* Features Grid - Handles 6 cards seamlessly */}
+          <div className="features-grid" style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(2, 1fr)",
+            gap: "20px"
+          }}>
+            {FEATURES.map((f) => (
+              <div className="feature-card" key={f.title} style={{
+                background: "#f9f8f4",
+                borderLeft: "4px solid #3d5334",
+                borderRadius: "12px",
+                padding: "24px",
+                boxShadow: "0 4px 15px rgba(0,0,0,0.02)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "12px"
+              }}>
+                <div className="feature-icon" style={{ color: "#3d5334", display: "flex" }}>
+                  {FEATURE_ICONS[f.iconKey]}
+                </div>
+                <div className="feature-title" style={{ fontFamily: "serif", fontSize: "18px", color: "#111", fontWeight: "bold" }}>
+                  {f.title}
+                </div>
+                <p className="feature-desc" style={{ fontSize: "12.5px", lineHeight: "1.6", color: "#666", margin: 0 }}>
+                  {f.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Right Side: Exclusive Sticky Form Container */}
+        <div className="form-sticky-container" style={{
+          background: "#3d5334",
+          borderRadius: "28px",
+          padding: "40px 30px",
+          position: "sticky",
+          top: "40px"
+        }}>
+          <h3 style={{ 
+            fontFamily: "serif", 
+            fontSize: "26px", 
+            color: "#fff", 
+            marginBottom: "25px", 
+            fontWeight: "normal",
+            textAlign: "left" 
+          }}>
+            Register for Exclusive Offers
+          </h3>
+          
+          <form className="contact-form" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+            
+            {/* Full Name */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ color: "#fff", fontSize: "14px" }}>Full Name <span style={{ color: "#ff6b6b" }}>*</span></label>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Enter your full name"
+                value={formData.fullName}
+                onChange={handleChange}
+                required
+                style={inputStyle}
+              />
+            </div>
+
+            {/* Email Address */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ color: "#fff", fontSize: "14px" }}>Email Address <span style={{ color: "#ff6b6b" }}>*</span></label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter email address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                style={inputStyle}
+              />
+            </div>
+
+            {/* Phone Number */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ color: "#fff", fontSize: "14px" }}>Phone Number <span style={{ color: "#ff6b6b" }}>*</span></label>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Enter Phone Number"
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                maxLength="10"
+                inputMode="numeric"
+                pattern="[6-9][0-9]{9}"
+                required
+                style={inputStyle}
+              />
+            </div>
+
+            {/* Message */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
+              <label style={{ color: "#fff", fontSize: "14px" }}>Your Message to Us <span style={{ color: "#ff6b6b" }}>*</span></label>
+              <textarea
+                name="message"
+                placeholder="Message"
+                value={formData.message}
+                onChange={handleChange}
+                style={{ ...inputStyle, height: "80px", resize: "none", borderRadius: "20px" }}
+              />
+            </div>
+
+            {/* Form Submit Button */}
+            <button
+              className="btn-primary"
+              disabled={loading}
+              style={{
+                width: "100%",
+                background: "#fff",
+                color: "#3d5334",
+                border: "none",
+                borderRadius: "50px",
+                padding: "14px",
+                fontSize: "15px",
+                fontWeight: "600",
+                cursor: "pointer",
+                marginTop: "10px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                transition: "all 0.2s ease"
+              }}
+            >
+              {loading ? "Submitting..." : "Contact Us"}
+            </button>
+
+            {success && <p style={{ color: "#a9dfbf", fontSize: "13px", margin: "5px 0 0 0", textAlign: "center" }}>{success}</p>}
+            {error && <p style={{ color: "#f5b7b1", fontSize: "13px", margin: "5px 0 0 0", textAlign: "center" }}>{error}</p>}
+          </form>
+        </div>
+
+      </div>
+     <div style={{ display: "flex", justifyContent: "center", width: "100%", padding: '60px 0px', }}>
+      <button className="btn-primary" onClick={() => scrollTo("contact")}>
+        Schedule a Site Visit →
+      </button>
+    </div>
+    </section>
 
       {/* LOCATION */}
       <section className="location-section" id="location">
@@ -689,7 +1118,7 @@ const handleSubmit = async (e) => {
       </section>
 
       {/* AMENITIES */}
-      <section id="amenities" style={{ background: "#fff" }}>
+      <section id="amenities" style={{ background: "#fff", padding: '80px 0px', }}>
         <div className="container">
           <div style={{ textAlign: "center", maxWidth: 620, margin: "0 auto 60px" }}>
             <p className="section-subtitle">World-Class Living</p>
@@ -713,6 +1142,156 @@ const handleSubmit = async (e) => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* WHY YELAHANKA SECTION */}
+      <section className="why-yelahanka-section" style={{ background: "#fff", padding: "20px 0px 80px" }}>
+        <div className="container" style={{ maxWidth: "1500px", margin: "0 auto", padding: "0 20px" }}>
+          
+          {/* Header Block */}
+          <div style={{ textAlign: "center", maxWidth: 850, margin: "0 auto 60px" }}>
+            <p className="section-subtitle">Location Strategy</p>
+            <h2 className="section-title">Why Yelahanka?</h2>
+            <p style={{ marginTop: 18, fontSize: 15, color: "#666", lineHeight: 1.7 }}>
+              Over the years, our work has been recognised across industry platforms for consistency, design clarity, and commitment to quality. Each acknowledgement reflects an approach rooted in responsibility rather than scale.
+            </p>
+          </div>
+
+          {/* Top Grid: Structural Map Image + Connectivity Times */}
+          <div className="location-grid" style={{ 
+            display: "grid", 
+            gridTemplateColumns: "1.1fr 0.9fr", 
+            gap: "40px", 
+            alignItems: "center",
+            marginBottom: "40px" 
+          }}>
+            {/* Left side: Project Layout / Route Outline Mock */}
+            <div style={{
+              minHeight: "250px"
+            }}>
+              {/* Replace with your local layout illustration image path if needed */}
+              <div className="why-img-wrap" onClick={() => setLightbox("../images/master-plan-map.png")}>
+              <img 
+                src="../images/map.png" 
+                alt="Location Roadmap" 
+                style={{ width: "100%", height: "100%", objectFit: "contain" }}
+              />
+              </div>
+            </div>
+
+            {/* Right side: Commute Duration Elements */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+              
+              {/* Item 1 */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "between", width: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                  <img src="../images/railway.svg" alt="railway station" />
+                  <span style={{ fontSize: "14.5px", color: "#222", fontWeight: "500", fontFamily: "DM Sans, sans-serif" }}>Yelahanka Railway Station, Schools &amp; Hospitals</span>
+                </div>
+                <span style={{ fontSize: "14px", color: "#333", marginLeft: "auto", fontWeight: "bold", fontFamily: "DM Sans, sans-serif" }}>10 Mins</span>
+              </div>
+
+              {/* Item 2 */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "between", width: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                   <img src="../images/flyover.svg" alt="Flyover" />
+                  <span style={{ fontSize: "14.5px", color: "#222", fontWeight: "500", fontFamily: "DM Sans, sans-serif" }}>Hebbal Flyover</span>
+                </div>
+                <span style={{ fontSize: "14px", color: "#333", marginLeft: "auto", fontWeight: "bold", fontFamily: "DM Sans, sans-serif" }}>15 Mins</span>
+              </div>
+
+              {/* Item 3 */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "between", width: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                   <img src="../images/tech-park.svg" alt="Tech Park" />
+                  <span style={{ fontSize: "14.5px", color: "#222", fontWeight: "500", fontFamily: "DM Sans, sans-serif" }}>Manyata Tech Park, New BEL Road</span>
+                </div>
+                <span style={{ fontSize: "14px", color: "#333", marginLeft: "auto", fontWeight: "bold", fontFamily: "DM Sans, sans-serif" }}>20 Mins</span>
+              </div>
+
+              {/* Item 4 */}
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "between", width: "100%" }}>
+                <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+                   <img src="../images/airport.svg" alt="Airport" />
+                  <span style={{ fontSize: "14.5px", color: "#222", fontWeight: "500", fontFamily: "DM Sans, sans-serif" }}>Kempegowda International Airport</span>
+                </div>
+                <span style={{ fontSize: "14px", color: "#333", marginLeft: "auto", fontWeight: "bold", fontFamily: "DM Sans, sans-serif" }}>25 Mins</span>
+              </div>
+
+            </div>
+          </div>
+       
+          {/* Middle Section: Fully Functional Embedded Google Map */}
+          <div style={{ width: "100%", height: "320px", borderRadius: "30px", overflow: "hidden", marginBottom: "-20px", position: "relative", zIndex: "1" }}>
+            <iframe
+              title="Google Map Location"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.6728347895475!2d77.5732101!3d13.0881525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1c8711acbc11%3A0x5c55ad4041a6c3e1!2sMajor%20Sandeep%20Unnikrishnan%20Rd%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1716300000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen=""
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        </div>
+        <div className="container" style={{ maxWidth: "1200px", margin: "0 auto",  background: "#3d5334", borderRadius: "28px", padding: "50px 40px", }}>
+          <h2 style={{ color: '#fff', fontSize: '36px', margin: '10px 0px 20px', fontWeight: 'normal', fontFamily: "'Playfair Display', serif", textAlign: 'center', }}>
+           Live in the New Downtown of North Bengaluru
+          </h2>
+          
+          {/* Bottom Section: Three Column Feature Grid Banner */}
+          <div className="green-highlights-banner" style={{
+           
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "40px",
+            textAlign: "center",
+            position: "relative",
+          }}>
+          
+            {/* Feature 1 */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img src="../images/heritage.svg" alt="Heritage" />
+                <h4 style={{ color: "#fff", textTransform: "uppercase", fontSize: "18px", letterSpacing: "1px", margin: "5px 0 0 0", fontFamily: "DM Sans, sans-serif" }}>
+                  The Heritage
+                </h4>
+              </div>
+              <p style={{ color: "#d0ded0", fontSize: "16px", lineHeight: "1.6", margin: 0, maxWidth: "280px", fontFamily: "DM Sans, sans-serif" }}>
+                One of Bengaluru's oldest and most established residential belts, now evolving into a high-growth hub.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img src="../images/green.svg" alt="Greenery" />
+                <h4 style={{ color: "#fff", textTransform: "uppercase", fontSize: "18px", letterSpacing: "1px", margin: "5px 0 0 0", fontFamily: "DM Sans, sans-serif" }}>
+                  The Greenery
+                </h4>
+              </div>
+              <p style={{ color: "#d0ded0", fontSize: "16px", lineHeight: "1.6", margin: 0, maxWidth: "280px", fontFamily: "DM Sans, sans-serif" }}>
+                A proper residential choice surrounded by well-maintained lakes and 4 reserved forest zones.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "12px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+                <img src="../images/connectivity.svg" alt="Connectivity" />
+                <h4 style={{ color: "#fff", textTransform: "uppercase", fontSize: "18px", letterSpacing: "1px", margin: "5px 0 0 0", fontFamily: "DM Sans, sans-serif" }}>
+                  The Connectivity
+                </h4>
+              </div>
+              <p style={{ color: "#d0ded0", fontSize: "16px", lineHeight: "1.6", margin: 0, maxWidth: "280px", fontFamily: "DM Sans, sans-serif" }}>
+                Seamless access to the Airport (25 mins) and the upcoming Airport Metro Line.
+              </p>
+            </div>
+
+          </div>
+
         </div>
       </section>
 
@@ -798,15 +1377,14 @@ const handleSubmit = async (e) => {
       </section>
 
       {/* ABOUT */}
-      {/* ABOUT */}
-<section className="about-section">
-  <div className="container">
-    <img
-      src="https://kevnitserver.com/projects/elegant_builders/elegant_builders.png"
-      alt="Elegant Builders"
-      style={{ height: 60, objectFit: "contain", marginBottom: 32, opacity: 0.9 }}
-    />
-    <p className="section-subtitle" style={{ color: "#a8c476" }}>Since 2004</p>
+      <section className="about-section">
+        <div className="container">
+          <img
+            src="https://kevnitserver.com/projects/elegant_builders/elegant_builders.png"
+            alt="Elegant Builders"
+            style={{ height: 60, objectFit: "contain", marginBottom: 32, opacity: 0.9 }}
+          />
+          <p className="section-subtitle" style={{ color: "#a8c476" }}>Since 2004</p>
           <h2 className="section-title" style={{ margin: "0 auto", maxWidth: 700 }}>Crafting Homes Worthy of Time</h2>
           <p style={{ color: "rgba(255,255,255,0.65)", fontSize: 15, lineHeight: 1.8, maxWidth: 640, margin: "24px auto 0" }}>
             Elegant Builders & Developers has been quietly shaping the skyline of Bengaluru for over two decades. Our journey is guided by ethics, empathy, and the joy of creating places people are proud to call home.
@@ -828,88 +1406,82 @@ const handleSubmit = async (e) => {
           <div style={{ textAlign: "center", marginBottom: 56 }}>
             <p className="section-subtitle">Get in Touch</p>
             <h2 className="section-title">Your Dream Home Awaits</h2>
+            <p style={{ marginTop: 18, fontSize: 15, color: "#666", lineHeight: 1.7 }}>
+              Limited Inventory Available. Join 136 families in a community designed for tomorrow’s appreciation.
+            </p>
           </div>
           <div className="contact-card">
             <div>
               <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", marginBottom: 32, color: "var(--charcoal)" }}>Book a Site Visit</h3>
-              <form
-        className="contact-form"
-        onSubmit={handleSubmit}
-      >
+              <form className="contact-form" onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="fullName"
+                  placeholder="Full Name"
+                  value={formData.fullName}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handlePhoneChange}
+                  maxLength="10"
+                  inputMode="numeric"
+                  pattern="[6-9][0-9]{9}"
+                  required
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <textarea
+                  name="message"
+                  placeholder="Any questions or preferences?"
+                  value={formData.message}
+                  onChange={handleChange}
+                />
+                <button
+                  className="btn-primary"
+                  style={{
+                    width: "100%",
+                    justifyContent: "center"
+                  }}
+                  disabled={loading}
+                >
+                  {
+                    loading
+                      ? "Submitting..."
+                      : "Request a Callback →"
+                  }
+                </button>
 
-        <input
-          type="text"
-          name="fullName"
-          placeholder="Full Name"
-          value={formData.fullName}
-          onChange={handleChange}
-          required
-        />
+                {
+                  success &&
+                  <p style={{
+                    color: "green",
+                    marginTop: 15
+                  }}>
+                    {success}
+                  </p>
+                }
 
-     <input
-  type="tel"
-  name="phone"
-  placeholder="Phone Number"
-  value={formData.phone}
-  onChange={handlePhoneChange}
-  maxLength="10"
-  inputMode="numeric"
-  pattern="[6-9][0-9]{9}"
-  required
-/>
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-
-        <textarea
-          name="message"
-          placeholder="Any questions or preferences?"
-          value={formData.message}
-          onChange={handleChange}
-        />
-
-        <button
-          className="btn-primary"
-          style={{
-            width: "100%",
-            justifyContent: "center"
-          }}
-          disabled={loading}
-        >
-          {
-            loading
-              ? "Submitting..."
-              : "Request a Callback →"
-          }
-        </button>
-
-        {
-  success &&
-  <p style={{
-    color: "green",
-    marginTop: 15
-  }}>
-    {success}
-  </p>
-}
-
-{
-  error &&
-  <p style={{
-    color: "red",
-    marginTop: 15
-  }}>
-    {error}
-  </p>
-}
-
-      </form>
+                {
+                  error &&
+                  <p style={{
+                    color: "red",
+                    marginTop: 15
+                  }}>
+                    {error}
+                  </p>
+                }
+              </form>
             </div>
             <div>
               <div style={{ background: "var(--cream)", borderRadius: 16, padding: "36px 32px", marginBottom: 28 }}>
@@ -951,12 +1523,20 @@ const handleSubmit = async (e) => {
       </section>
 
       {/* FOOTER */}
-      <footer>
-        <img src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png" alt="Elegant Atmos" style={{ height: 48, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} />
-        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 8 }}>Yelahanka, Bengaluru · +91 888 424 4879</p>
-        <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)" }}>© 2025 Elegant Builders & Developers. All rights reserved.</p>
-      </footer>
+      <footer> 
+        <div  style={{ height: 48, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} >
+          <img
+            src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
+            alt="Elegant Atmos"
+            style={{ height: 44, objectFit: "contain" }}
+          />
+          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", marginLeft: '20px', }}/>
+          </div>   
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 8, fontFamily: 'DM Sans, sans-serif' }}>Yelahanka, Bengaluru · +91 888 424 4879</p>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: 'DM Sans, sans-serif' }}>© 2025 Elegant Builders & Developers. All rights reserved.</p>
+    </footer>
 
+    
       {/* WHATSAPP FLOATING BUTTON */}
       <a
         href="https://wa.me/918884244879"
@@ -965,18 +1545,24 @@ const handleSubmit = async (e) => {
         className="wa-fab"
         aria-label="Chat on WhatsApp"
       >
-        <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fillRule="evenodd" clipRule="evenodd" d="M16 2C8.268 2 2 8.268 2 16c0 2.417.632 4.683 1.74 6.648L2 30l7.563-1.715A13.94 13.94 0 0016 30c7.732 0 14-6.268 14-14S23.732 2 16 2z" fill="#fff"/>
-          <path d="M22.003 19.44c-.32-.16-1.89-.933-2.183-1.04-.293-.107-.506-.16-.72.16-.213.32-.826 1.04-.013 1.2.294.053 1.04.16 1.493.16.453 0 .96-.053 1.413-.267.453-.213.8-.64.853-1.093.053-.453-.16-.8-.48-.96l-.363-.16zM16.08 11c-2.8 0-5.08 2.28-5.08 5.08 0 1.12.363 2.16.973 3l-.64 1.893 1.96-.627a5.06 5.06 0 002.787.84c2.8 0 5.08-2.28 5.08-5.08S18.88 11 16.08 11zm0 9.307a4.24 4.24 0 01-2.16-.587l-.153-.093-1.6.427.427-1.547-.107-.16a4.213 4.213 0 01-.653-2.267c0-2.347 1.907-4.253 4.253-4.253 2.347 0 4.254 1.906 4.254 4.253s-1.907 4.227-4.261 4.227z" fill="#25D366"/>
-        </svg>
+         <img src="../images/whatsapp.svg" alt="Whatsapp"  style={{ height: 44, objectFit: "contain" }}/>
+      </a>
+      <a
+        href="tel:918884244879"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="phn-fab"
+        aria-label="Chat on WhatsApp"
+      >
+         <img src="../images/phone.svg" alt="Phone"  style={{ height: 37, objectFit: "contain" }}/>
       </a>
 
       {/* FLOATING DOWNLOAD BROCHURE BUTTON */}
-      <a
+      {/* <a
         href="https://kevnitserver.com/projects/elegant_builders/Elegant_atmos_Brochure.pdf"
         target="_blank"
         rel="noopener noreferrer"
-        style={{ position: "fixed", bottom: 32, right: 32, zIndex: 800, display: "flex", alignItems: "center", gap: 10, background: "#5F733C", color: "#fff", padding: "13px 22px", borderRadius: 50, fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", textDecoration: "none", boxShadow: "0 6px 28px rgba(95,115,60,0.45)", transition: "transform 0.2s, box-shadow 0.2s, background 0.2s" }}
+        style={{ position: "fixed", bottom: 32, right: 32, zIndex: 800, display: "flex", alignItems: "center", gap: 10, background: "#5F733C", color: "#fff", padding: "13px 22px", borderRadius: 50, fontFamily: "'DM Sans', DM Sans, sans-serif", fontSize: 13, fontWeight: 600, letterSpacing: "0.06em", textDecoration: "none", boxShadow: "0 6px 28px rgba(95,115,60,0.45)", transition: "transform 0.2s, box-shadow 0.2s, background 0.2s" }}
         onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.background = "#3d4f27"; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "#5F733C"; }}
       >
@@ -985,7 +1571,161 @@ const handleSubmit = async (e) => {
           <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"/>
         </svg>
         Download Brochure
-      </a>
+      </a> */}
+      <button
+  onClick={() => setModalSource("brochure")}
+  style={{ 
+    position: "fixed", 
+    bottom: 32, 
+    right: 32, 
+    zIndex: 800, 
+    display: "flex", 
+    alignItems: "center", 
+    gap: 10, 
+    background: "#5F733C", 
+    color: "#fff", 
+    padding: "13px 22px", 
+    borderRadius: 50, 
+    fontFamily: "'DM Sans', DM Sans, sans-serif", 
+    fontSize: 13, 
+    fontWeight: 600, 
+    letterSpacing: "0.06em", 
+    textDecoration: "none", 
+    boxShadow: "0 6px 28px rgba(95,115,60,0.45)", 
+    transition: "transform 0.2s, box-shadow 0.2s, background 0.2s",
+    border: "none",
+    cursor: "pointer"
+  }}
+  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-3px)"; e.currentTarget.style.background = "#3d4f27"; }}
+  onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "#5F733C"; }}
+>
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M8 1v9M5 7l3 3 3-3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"/>
+  </svg>
+  Download Brochure
+</button>
+      {/* POPUP MODAL ENVELOPE */}
+{/* UNIFIED POPUP MODAL */}
+{modalSource && (
+  <div 
+    className="modal-overlay" 
+    style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0, 0, 0, 0.4)',
+      backdropFilter: 'blur(20px)',          
+      WebkitBackdropFilter: 'blur(8px)',    
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 1000,
+      padding: '20px',
+      boxSizing: 'border-box'
+    }}
+    onClick={() => setModalSource("")} 
+  >
+    <div 
+      className="modal-content" 
+      style={{
+        background: '#fff',
+        borderRadius: '16px',
+        width: '100%',
+        maxWidth: '480px',
+        padding: '40px 30px',
+        position: 'relative',
+        boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+        boxSizing: 'border-box'
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      <button 
+        onClick={() => setModalSource("")}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          right: '20px',
+          background: 'none',
+          border: 'none',
+          fontSize: '24px',
+          cursor: 'pointer',
+          color: '#888',
+          lineHeight: '1'
+        }}
+      >
+        &times;
+      </button>
+
+      {/* Dynamic Header Titles */}
+      <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", marginBottom: 32, color: "var(--charcoal)", marginTop: 0 }}>
+        {/* {modalSource === "brochure" ? "Download Project Brochure" : "Get Floor plan & Price Sheet"} */}
+        {modalSource === "brochure" 
+    ? "Download Project Brochure" 
+    : modalSource === "generic" 
+    ? "Get Floor plan & Price Sheet" // 👈 Dynamic text when auto-triggered by useEffect
+    : "Book a Site Visit"}
+      </h3>
+      
+      <form 
+        className="contact-form" 
+        onSubmit={(e) => handleSubmit(e, modalSource)} // 👈 Passes context directly into handleSubmit
+        style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
+      >
+        <input
+          type="text"
+          name="fullName"
+          placeholder="Full Name"
+          value={formData.fullName}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          value={formData.phone}
+          onChange={handlePhoneChange}
+          maxLength="10"
+          inputMode="numeric"
+          pattern="[6-9][0-9]{9}"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Any questions or preferences?"
+          value={formData.message}
+          onChange={handleChange}
+          style={{ minHeight: '80px', resize: 'vertical' }}
+        />
+        
+        <button className="btn-primary" style={{ width: "100%", justifyContent: "center" }} disabled={loading}>
+          {/* {loading ? "Submitting..." : modalSource === "brochure" ? "Get Brochure Now →" : "Get Now →"} */}
+          {loading 
+    ? "Submitting..." 
+    : modalSource === "brochure" 
+    ? "Get Brochure Now →" 
+    : modalSource === "generic"
+    ? "Get Now →" // 👈 Dynamic text when auto-triggered by useEffect
+    : "Request a Callback →"}
+        </button>
+
+        {success && <p style={{ color: "green", marginTop: 5, marginBottom: 0 }}>{success}</p>}
+        {error && <p style={{ color: "red", marginTop: 5, marginBottom: 0 }}>{error}</p>}
+      </form>
+    </div>
+  </div>
+)}
     </>
   );
 }
