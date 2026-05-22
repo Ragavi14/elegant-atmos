@@ -288,7 +288,7 @@ const handlePhoneChange = (e) => {
   setError("");
 };
 
-const handleSubmit = async (e, source = "generic") => {
+const handleSubmit = async (e, source = "general") => {
   e.preventDefault();
 
   setSuccess("");
@@ -329,16 +329,16 @@ const handleSubmit = async (e, source = "generic") => {
         phone: formData.phone,
         email: formData.email.trim(),
         message: formData.message || "",
-        formType: source
+        formType: source // 👈 Sends 'general', 'brochure', 'floor-plan', or 'popup' straight to DB
       })
     });
 
     const data = await response.json();
 
     if (data.success) {
-      let openedFile = false; // Tracking flag to prevent accidental redirects
+      let openedFile = false;
 
-      // 3. Dynamic PDF Handling
+      // 3. Precise File Handling Routing
       if (source === "brochure") {
         window.open(
           "https://kevnitserver.com/projects/elegant_builders/Elegant_atmos_Brochure.pdf", 
@@ -346,7 +346,7 @@ const handleSubmit = async (e, source = "generic") => {
           "noopener,noreferrer"
         );
         openedFile = true;
-      } else if (source === "generic") {
+      } else if (source === "floor-plan") {
         window.open(
           "./images/Elegant-Atmos-Floor-Plans-and-Cost-Sheet.pdf", 
           "_blank", 
@@ -355,7 +355,7 @@ const handleSubmit = async (e, source = "generic") => {
         openedFile = true;
       }
 
-      // 4. Reset input text fields cleanly
+      // 4. Reset Input State Containers
       setFormData({
         fullName: "",
         phone: "",
@@ -364,18 +364,18 @@ const handleSubmit = async (e, source = "generic") => {
         formType: source
       });
 
-      // 5. Cleanly reset tracking state to close the modal layout instantly
+      // 5. Instantly dismiss popup wrappers if open
       if (typeof setModalSource === "function") {
         setModalSource(""); 
       }
 
-      // 6. Redirection Logic Condition
+      // 6. Conditional Routing Resolution Block
       if (openedFile) {
-        // Show an in-page overlay success notice since they are staying on the page
-        setSuccess("Thank you! Opening your files in a new tab...");
+        // Keeps user on landing page for brochure/floor-plan files download
+        setSuccess("Thank you! Opening your requested documents in a new tab...");
         setTimeout(() => setSuccess(""), 4000);
       } else {
-        // 👈 ONLY redirects to /thank-you if no PDF was launched (e.g. contact footer layouts)
+        // 👈 Redirects directly to Thank You page for "general" and "popup" form fields
         navigate('/thank-you');
       }
 
@@ -492,14 +492,14 @@ const [modalSource, setModalSource] = useState("");
         .hero-title em { font-style: italic; color: #a8c476; }
         .hero-tagline {  font-style: italic; color: rgba(255,255,255,0.65); font-size: clamp(1.1rem, 2vw, 1.4rem); margin-bottom: 40px; max-width: 686px; }
         .hero-tagline span{font-size: 35px; font-weight: bold;}
-        .hero-stats { display: flex; gap: 135px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 36px; margin-top: 36px; }
+        .hero-stats { display: flex; gap: 30px 150px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.15); padding-top: 36px; margin-top: 36px; }
         .hero-stat-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: #a8c476; }
         .hero-stat-label { font-size: 15px; color: rgba(255,255,255,0.6); letter-spacing: 0.1em; text-transform: uppercase; }
         .hero-scroll { position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.5); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; animation: bounce 2s infinite; }
         @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
         /* Highlights grid */
-        .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--charcoal); }
+        .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--charcoal); width: 100%; }
         @media(max-width:600px) { .green-highlights-banner { grid-template-columns: 1fr !important; } }
         .highlight-cell { background: var(--cream); padding: 44px 32px; text-align: center; transition: background 0.3s; }
         .highlight-cell:hover { background: var(--green); }
@@ -717,12 +717,12 @@ const [modalSource, setModalSource] = useState("");
       <nav style={{ background: navBg, boxShadow: navShadow }}>
         <div className="nav-inner">
           <div>
+          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
           <img
             src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
             alt="Elegant Atmos"
-            style={{ height: 44, objectFit: "contain" }}
+            style={{ height: 44, objectFit: "contain",  marginLeft: '20px', }}
           />
-          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", marginLeft: '20px', }}/>
           </div>
          
           
@@ -767,7 +767,7 @@ const [modalSource, setModalSource] = useState("");
             <button  
               className="btn-outline"  
               style={{ color: "#a8c476", borderColor: "#a8c476" }}  
-              onClick={() => setModalSource("generic")} // 👈 Changed from setShowModal(true)
+              onClick={() => setModalSource("floor-plan")} // 👈 Changed from setShowModal(true)
             > 
               Get Floor Plans & Price Sheet 
             </button>            </div>
@@ -990,7 +990,7 @@ const [modalSource, setModalSource] = useState("");
             Register for Exclusive Offers
           </h3>
           
-          <form className="contact-form" onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
+          <form className="contact-form" onSubmit={(e) => handleSubmit(e, "general")} style={{ display: "flex", flexDirection: "column", gap: "18px" }}>
             
             {/* Full Name */}
             <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -1308,9 +1308,79 @@ const [modalSource, setModalSource] = useState("");
             ))}
           </div>
           {galleryTab === "Floor Plan" ? (
-            <div className="floorplan-grid">
-              {FLOOR_PLANS.map((plan) => <FloorPlanCard key={plan.label} plan={plan} />)}
+            <div className="floorplan-section-container" style={{ position: 'relative', width: '100%', height: '450px' }}>
+  
+            {/* 1. THE ENTIRE GRID CONTAINING YOUR PRE EXISTING CARDS (BLURRED) */}
+            <div 
+              className="floorplan-grid" 
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", // Preserves your layout alignment rules
+                gap: "24px",
+                width: "100%",
+                filter: "blur(15px)", // 👈 Blurs out all images, text tags, and cards combined
+                opacity: 0.4, // Softens the background contrast so your button stands out beautifully
+                pointerEvents: "none", // Completely blocks user clicks or inspect drags on individual items
+                userSelect: "none"
+              }}
+            >
+              {FLOOR_PLANS.map((plan) => (
+                <FloorPlanCard key={plan.label} plan={plan} />
+              ))}
             </div>
+
+            {/* 2. SOLID ABSOLUTE OVERLAY TO CENTERED BUTTON */}
+            <div style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              zIndex: 10
+            }}>
+              <button  
+                className="btn-outline"  
+                style={{ 
+                  color: "#5F733C", 
+                  borderColor: "#5F733C",
+                  backgroundColor: "#ffffff", // Crisp white background anchors visibility over the multi-colored blur layout
+                  padding: "16px 36px",
+                  borderRadius: "50px",
+                  fontSize: "15px",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  boxShadow: "0 10px 30px rgba(95, 115, 60, 0.2)", // Distinct shadow depth matching the template profile
+                  letterSpacing: "0.02em",
+                  transition: "all 0.25s cubic-bezier(0.16, 1, 0.3, 1)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                  fontFamily: "'DM Sans', sans-serif"
+                }}  
+                onClick={() => setModalSource("floor-plan")}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#5F733C';
+                  e.currentTarget.style.color = '#ffffff';
+                  e.currentTarget.style.transform = 'translateY(-2px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#ffffff';
+                  e.currentTarget.style.color = '#5F733C';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
+              > 
+                {/* Modern lock padlock indicator icon */}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                Unlock Floor Plans
+              </button>
+            </div>
+          </div>
           ) : galleryTab === "Master Plan" ? (
             <div style={{ textAlign: "center" }}>
               <div className="gallery-img-wrap" style={{ maxWidth: 800, margin: "0 auto", aspectRatio: "16/10" }} onClick={() => setLightbox(GALLERY["Master Plan"][0])}>
@@ -1413,7 +1483,7 @@ const [modalSource, setModalSource] = useState("");
           <div className="contact-card">
             <div>
               <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", marginBottom: 32, color: "var(--charcoal)" }}>Book a Site Visit</h3>
-              <form className="contact-form" onSubmit={handleSubmit}>
+              <form className="contact-form" onSubmit={(e) => handleSubmit(e, "general")}>
                 <input
                   type="text"
                   name="fullName"
@@ -1525,12 +1595,12 @@ const [modalSource, setModalSource] = useState("");
       {/* FOOTER */}
       <footer> 
         <div  style={{ height: 48, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} >
+          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
           <img
             src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
             alt="Elegant Atmos"
-            style={{ height: 44, objectFit: "contain" }}
+            style={{ height: 44, objectFit: "contain", marginLeft: '20px', }}
           />
-          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", marginLeft: '20px', }}/>
           </div>   
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 8, fontFamily: 'DM Sans, sans-serif' }}>Yelahanka, Bengaluru · +91 888 424 4879</p>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: 'DM Sans, sans-serif' }}>© 2025 Elegant Builders & Developers. All rights reserved.</p>
@@ -1661,17 +1731,16 @@ const [modalSource, setModalSource] = useState("");
 
       {/* Dynamic Header Titles */}
       <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: "1.6rem", marginBottom: 32, color: "var(--charcoal)", marginTop: 0 }}>
-        {/* {modalSource === "brochure" ? "Download Project Brochure" : "Get Floor plan & Price Sheet"} */}
         {modalSource === "brochure" 
-    ? "Download Project Brochure" 
-    : modalSource === "generic" 
-    ? "Get Floor plan & Price Sheet" // 👈 Dynamic text when auto-triggered by useEffect
-    : "Book a Site Visit"}
+          ? "Download Project Brochure" 
+          : modalSource === "floor-plan" 
+          ? "Get Floor plan & Price Sheet" 
+          : "Book a Site Visit"}
       </h3>
       
       <form 
         className="contact-form" 
-        onSubmit={(e) => handleSubmit(e, modalSource)} // 👈 Passes context directly into handleSubmit
+        onSubmit={(e) => handleSubmit(e, modalSource)} // 👈 Dynamically passes "brochure", "floor-plan", or "popup"
         style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
       >
         <input
@@ -1710,14 +1779,13 @@ const [modalSource, setModalSource] = useState("");
         />
         
         <button className="btn-primary" style={{ width: "100%", justifyContent: "center" }} disabled={loading}>
-          {/* {loading ? "Submitting..." : modalSource === "brochure" ? "Get Brochure Now →" : "Get Now →"} */}
           {loading 
-    ? "Submitting..." 
-    : modalSource === "brochure" 
-    ? "Get Brochure Now →" 
-    : modalSource === "generic"
-    ? "Get Now →" // 👈 Dynamic text when auto-triggered by useEffect
-    : "Request a Callback →"}
+            ? "Submitting..." 
+            : modalSource === "brochure" 
+            ? "Get Brochure Now →" 
+            : modalSource === "floor-plan"
+            ? "Get Now →" 
+            : "Request a Callback →"}
         </button>
 
         {success && <p style={{ color: "green", marginTop: 5, marginBottom: 0 }}>{success}</p>}
