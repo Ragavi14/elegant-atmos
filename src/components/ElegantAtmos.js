@@ -455,28 +455,28 @@ const handleNavClick = (link) => {
           font-family: 'DM Sans', DM Sans, sans-serif; font-size: 14px; font-weight: 500;
           letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--green);
           cursor: pointer; transition: all 0.3s; text-decoration: none;
-          animation: attentionPulse 2.5s infinite ease-in-out;
         }
         .btn-outline:hover { background: var(--green); color: #fff; }
+        .btn-animation{ animation: attentionPulse 2.5s infinite ease-in-out;}
         @keyframes attentionPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(168, 196, 118, 0.4);
-    background : rgba(168, 196, 118, 0.4);
-    color: #fff
-  }
-  50% {
-    transform: scale(1.05); /* Subtle grow */
-    box-shadow: 0 0 15px 5px  var(--green); /* Soft glow */
-     background: var(--green);
-     color: #fff
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(168, 196, 118, 0.4);
-   
-  }
-}
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(168, 196, 118, 0.4);
+          background : rgba(168, 196, 118, 0.4);
+          color: #fff
+        }
+        50% {
+          transform: scale(1.03); /* Subtle grow */
+          box-shadow: 0 0 15px 5px rgba(168, 196, 118, 0.2); /* Soft glow */
+          background: var(--green);
+          color: #fff
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(168, 196, 118, 0.4);
+        
+        }
+      }
         /* Lightbox */
         .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
         .lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 8px; object-fit: contain; }
@@ -793,11 +793,16 @@ const handleNavClick = (link) => {
               <button className="btn-primary" onClick={() => scrollTo("contact")}>Schedule a Site Visit →</button>
               {/* <button className="btn-outline" style={{ color: "#a8c476", borderColor: "#a8c476" }} onClick={() => scrollTo("gallery")}>View Gallery</button> */}
               <button  
-                className="btn-outline"  
+                className="btn-outline btn-animation"  
                 style={{ color: "#a8c476", borderColor: "#a8c476" }}  
                 onClick={() => setModalSource("floor-plan")} // 👈 Changed from setShowModal(true)
               > 
-               Get Floor Plans & Price Sheet <img src="./images/download.png" alt="download icon"/>
+               Get Floor Plans & Price Sheet 
+               <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M8 1v9M5 7l3 3 3-3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 11v2a1 1 0 001 1h10a1 1 0 001-1v-2" stroke="#fff" strokeWidth="1.6" strokeLinecap="round"/>
+              </svg>
+               {/* <img src="./images/download.png" alt="download icon"/> */}
               </button>            
             </div>
             <div className="hero-stats">
