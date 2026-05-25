@@ -403,6 +403,15 @@ const inputStyle = {
 };
 
 const [modalSource, setModalSource] = useState("");
+const handleNavClick = (link) => {
+  const targetId = link.toLowerCase();
+  
+  // 1. Update the URL hash
+  window.location.hash = targetId; 
+  
+  // 2. Trigger your existing scroll function
+  scrollTo(targetId); 
+};
   return (
     <>
       <style>{`
@@ -728,7 +737,7 @@ const [modalSource, setModalSource] = useState("");
           <ul className="nav-links">
             {NAV_LINKS.map((l) => (
               <li key={l}>
-                <button className="nav-btn" onClick={() => scrollTo(l.toLowerCase())}>{l}</button>
+                <button className="nav-btn" onClick={() => handleNavClick(l)}>{l}</button>
               </li>
             ))}
           </ul>
