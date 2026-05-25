@@ -455,9 +455,28 @@ const handleNavClick = (link) => {
           font-family: 'DM Sans', DM Sans, sans-serif; font-size: 14px; font-weight: 500;
           letter-spacing: 0.08em; text-transform: uppercase; border: 1.5px solid var(--green);
           cursor: pointer; transition: all 0.3s; text-decoration: none;
+          animation: attentionPulse 2.5s infinite ease-in-out;
         }
         .btn-outline:hover { background: var(--green); color: #fff; }
-
+        @keyframes attentionPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(168, 196, 118, 0.4);
+    background : rgba(168, 196, 118, 0.4);
+    color: #fff
+  }
+  50% {
+    transform: scale(1.05); /* Subtle grow */
+    box-shadow: 0 0 15px 5px  var(--green); /* Soft glow */
+     background: var(--green);
+     color: #fff
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(168, 196, 118, 0.4);
+   
+  }
+}
         /* Lightbox */
         .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.92); z-index: 9999; display: flex; align-items: center; justify-content: center; cursor: zoom-out; }
         .lightbox img { max-width: 90vw; max-height: 88vh; border-radius: 8px; object-fit: contain; }
@@ -773,13 +792,14 @@ const handleNavClick = (link) => {
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
               <button className="btn-primary" onClick={() => scrollTo("contact")}>Schedule a Site Visit →</button>
               {/* <button className="btn-outline" style={{ color: "#a8c476", borderColor: "#a8c476" }} onClick={() => scrollTo("gallery")}>View Gallery</button> */}
-            <button  
-              className="btn-outline"  
-              style={{ color: "#a8c476", borderColor: "#a8c476" }}  
-              onClick={() => setModalSource("floor-plan")} // 👈 Changed from setShowModal(true)
-            > 
-              Get Floor Plans & Price Sheet 
-            </button>            </div>
+              <button  
+                className="btn-outline"  
+                style={{ color: "#a8c476", borderColor: "#a8c476" }}  
+                onClick={() => setModalSource("floor-plan")} // 👈 Changed from setShowModal(true)
+              > 
+               Get Floor Plans & Price Sheet <img src="./images/download.png" alt="download icon"/>
+              </button>            
+            </div>
             <div className="hero-stats">
               {[{ num: "2 Towers", sub: "G+14 Floors" }, { num: "136 Units", sub: "Freewall Homes" }, { num: "50+ Amenities", sub: "Across All Levels" }, { num: "IGBC Silver-Rated ", sub: "Green Community" }, { num: "RERA", sub: "Registered" }].map((s) => (
                 <div key={s.num}>
@@ -1613,7 +1633,7 @@ const handleNavClick = (link) => {
           </div>   
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 8, fontFamily: 'DM Sans, sans-serif' }}>Yelahanka, Bengaluru · +91 888 424 4879</p>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: 'DM Sans, sans-serif' }}>© 2025 Elegant Builders & Developers. All rights reserved.</p>
-    </footer>
+      </footer>
 
     
       {/* WHATSAPP FLOATING BUTTON */}
