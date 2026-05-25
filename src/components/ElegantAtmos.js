@@ -725,11 +725,11 @@ const handleNavClick = (link) => {
       <nav style={{ background: navBg, boxShadow: navShadow }}>
         <div className="nav-inner">
           <div>
-          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
+          <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 60, objectFit: "contain", }}/>
           <img
             src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
             alt="Elegant Atmos"
-            style={{ height: 44, objectFit: "contain",  marginLeft: '20px', }}
+            style={{ height: 60, objectFit: "contain",  marginLeft: '20px', }}
           />
           </div>
          
@@ -1604,7 +1604,7 @@ const handleNavClick = (link) => {
       {/* FOOTER */}
       <footer> 
         <div  style={{ height: 48, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} >
-          <img src="../images/Elegant-logo.png" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
+          <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
           <img
             src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
             alt="Elegant Atmos"
