@@ -748,7 +748,8 @@ const handleNavClick = (link) => {
         {menuOpen && (
           <div className="mobile-menu">
             {NAV_LINKS.map((l) => (
-              <button key={l} className="mobile-btn" onClick={() => scrollTo(l.toLowerCase())}>{l}</button>
+              // <button key={l} className="mobile-btn" onClick={() => scrollTo(l.toLowerCase())}>{l}</button>
+              <button key={l} className="mobile-btn" onClick={() => handleNavClick(l)}>{l}</button>
             ))}
           </div>
         )}
