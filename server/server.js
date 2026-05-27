@@ -177,7 +177,7 @@ app.post("/api/contact", async (req, res) => {
     });
 
   } catch (error) {
-    // console.error("❌ CONTACT API FAILURE DETAILS:", error.response?.data || error.message);
+    // console.error("CONTACT API FAILURE DETAILS:", error.response?.data || error.message);
 
     return res.status(500).json({
       success: false,

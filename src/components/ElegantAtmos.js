@@ -241,7 +241,7 @@ useEffect(() => {
       }
       return currentSource;
     });
-  }, 5000);
+  }, 10000);
 
   // Clean up the timer if the user navigates away before 5 seconds passes
   return () => clearTimeout(autoPopupTimer);
@@ -420,7 +420,14 @@ const handleNavClick = (link) => {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { font-family: 'DM Sans', DM Sans, sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
-
+        @media (max-width: 600px) {
+          body {
+            h2{font-size: 25px !important;}
+            .hero{
+            .btn-outline {width: 100%}
+            .btn-primary {width: 100%}}
+          }
+        }
         :root {
           --green: #5F733C;
           --green-dark: #3d4f27;
@@ -437,8 +444,8 @@ const handleNavClick = (link) => {
         .section-subtitle { font-size: 14px; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
 
         section { padding: 20px 0; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
-        @media(max-width:768px) { .container { padding: 0 20px; } section { padding: 70px 0; } }
+        .container { width:100%; max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+        @media(max-width:768px) { .container { padding: 0 20px; } section { padding: 40px 0; } }
 
         .btn-primary {
           display: inline-flex; align-items: center; gap: 10px;
@@ -505,7 +512,7 @@ const handleNavClick = (link) => {
         .mobile-btn:last-child { border-bottom: none; }
 
         /* Hero */
-        .hero { position: relative; height: 100vh; min-height: 800px; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
+        .hero { position: relative; height: auto; min-height: 100svh; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
         .hero-bg-pattern { position: absolute; inset: 0; opacity: 1; background: url('http://kevnitserver.com/projects/elegant_builders/exterior2.jpg') center/cover no-repeat; }
         .hero-bg-pattern::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,18,6,0.82) 0%, rgba(10,18,6,0.65) 45%, rgba(10,18,6,0.35) 100%); }
         .hero-content { position: relative; z-index: 2; }
@@ -610,7 +617,7 @@ const handleNavClick = (link) => {
         .about-stats { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; margin-top: 60px; padding-top: 60px; border-top: 1px solid rgba(255,255,255,0.15); }
         .about-stat-n { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 700; color: #a8c476; }
         .about-stat-l { font-size: 13px; color: rgba(255,255,255,0.6); margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
-
+        @media(max-width:600px) {.about-stat-n {font-size: 2rem; }}
         /* Contact */
         .contact-section { background: var(--cream); padding: 60px 0px; }
         .contact-card { background: #fff; border-radius: 20px; padding: 60px; box-shadow: 0 24px 80px rgba(95,115,60,0.12); display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
@@ -968,7 +975,7 @@ const handleNavClick = (link) => {
           
           <div style={{ textAlign: "start", maxWidth: 620, margin: "0 0 10px" }}>
             <p className="section-subtitle">The Project</p>
-            <h2 className="section-title"> Your Whole World<br />of Worth</h2>
+            <h2 className="section-title"> Your Whole World of Worth</h2>
             <p style={{ marginTop: 18, fontSize: 15, color: "#666", lineHeight: 1.7 }}>
               A 1.8-acre boutique community in Yelahanka offering a rare balance of city access and peaceful green living.
             </p>
@@ -1637,7 +1644,7 @@ const handleNavClick = (link) => {
           />
           </div>   
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginBottom: 8, fontFamily: 'DM Sans, sans-serif' }}>Yelahanka, Bengaluru · +91 888 424 4879</p>
-          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: 'DM Sans, sans-serif' }}>© 2025 Elegant Builders & Developers. All rights reserved.</p>
+          <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", fontFamily: 'DM Sans, sans-serif' }}>© 2026 Elegant Builders & Developers. All rights reserved.</p>
       </footer>
 
     
