@@ -537,7 +537,7 @@ const handleNavClick = (link) => {
 
         /* Highlights grid */
         .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--charcoal); width: 100%; }
-        @media(max-width:600px) { .green-highlights-banner { grid-template-columns: 1fr !important; } .hero-content{padding-top: 50px;}  .highlights-grid{width: 100%} }
+        @media(max-width:600px) { .green-highlights-banner { grid-template-columns: 1fr !important; }  .highlights-grid{width: 100%} }
         .highlight-cell { background: var(--cream); padding: 44px 32px; text-align: center; transition: background 0.3s; }
         .highlight-cell:hover { background: var(--green); }
         .highlight-cell:hover .hl-num { color: #fff; }
@@ -648,9 +648,7 @@ const handleNavClick = (link) => {
           .hero {min-height: 130svh !important;}
           .highlights-grid { grid-template-columns: 1fr;}
         }
-        @media(max-width: 1300px) {
-          .hero {min-height: 140svh !important;}
-        }
+        
         @media(max-width:600px) {
           /* Hero */
           .hero { padding: 0 24px; align-items: flex-end; padding-bottom: 80px; min-height: 110svh; height: auto; }
