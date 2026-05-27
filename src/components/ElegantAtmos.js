@@ -231,21 +231,35 @@ export default function ElegantAtmos() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
  
-useEffect(() => {
-  // Set a timer to trigger the popup after 5000 milliseconds (5 seconds)
-  const autoPopupTimer = setTimeout(() => {
-    // This checks if the user hasn't already manually opened a modal
-    setModalSource((currentSource) => {
-      if (!currentSource) {
-        return "popup"; // Opens the "Book a Site Visit" variation automatically
-      }
-      return currentSource;
-    });
-  }, 10000);
+  useEffect(() => {
+      // Set a timer to trigger the popup after 5000 milliseconds (5 seconds)
+      const autoPopupTimer = setTimeout(() => {
+        // This checks if the user hasn't already manually opened a modal
+        setModalSource((currentSource) => {
+          if (!currentSource) {
+            return "popup"; // Opens the "Book a Site Visit" variation automatically
+          }
+          return currentSource;
+        });
+      }, 10000);
 
-  // Clean up the timer if the user navigates away before 5 seconds passes
-  return () => clearTimeout(autoPopupTimer);
-}, []); // Empty dependency array means this runs exactly once when the page loads
+      // Clean up the timer if the user navigates away before 5 seconds passes
+      return () => clearTimeout(autoPopupTimer);
+    }, []); // Empty dependency array means this runs exactly once when the page loads
+
+    useEffect(() => {
+    const handleScrollClose = () => {
+      if (menuOpen) {
+        setMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScrollClose);
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollClose);
+    };
+  }, [menuOpen]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -502,10 +516,126 @@ const handleNavClick = (link) => {
           cursor: pointer; transition: color 0.2s; font-family: 'DM Sans', DM Sans, sans-serif; padding: 0;
         }
         .nav-btn:hover { color: #fff; }
-        .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
-        .hamburger span { width: 24px; height: 2px; background: #fff; display: block; transition: all 0.3s; }
+        .hamburger {
+  display: none;
+  position: relative;
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1201;
+  padding: 0;
+}
+
+.hamburger span {
+  position: absolute;
+  left: 9px;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 10px;
+  transition: all 0.35s ease;
+  transform-origin: center;
+}
+
+/* Top line */
+.hamburger span:nth-child(1) {
+  top: 13px;
+}
+
+/* Middle line */
+.hamburger span:nth-child(2) {
+  top: 20px;
+}
+
+/* Bottom line */
+.hamburger span:nth-child(3) {
+  top: 27px;
+}
+
+/* OPEN STATE */
+
+.hamburger.open span:nth-child(1) {
+  top: 20px;
+  transform: rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  top: 20px;
+  transform: rotate(-45deg);
+}
+
+
         @media(max-width:900px) { .nav-links { display: none; } .hamburger { display: flex; } }
-        .mobile-menu { position: fixed; top: 76px; left: 0; right: 0; background: rgba(15,22,10,0.97); padding: 24px 40px; z-index: 999; }
+        .menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 998;
+  animation: fadeOverlay 0.3s ease;
+}
+
+@keyframes fadeOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+  .mobile-btn {
+  display: block;
+  color: #fff;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: none;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'DM Sans', sans-serif;
+  transition: all 0.25s ease;
+}
+
+.mobile-btn:hover {
+  color: #b8cc94;
+  padding-left: 6px;
+}
+        .mobile-menu {
+  position: fixed;
+  top: 76px;
+  left: 0;
+  right: 0;
+  background: rgba(15,22,10,0.96);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 24px 20px;
+  z-index: 999;
+  animation: slideDown 0.35s ease;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+  @keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
         .mobile-btn {
           display: block; color: #fff; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
           font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
@@ -518,7 +648,7 @@ const handleNavClick = (link) => {
         .hero { position: relative; height: auto; min-height: 100svh; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
         .hero-bg-pattern { position: absolute; inset: 0; opacity: 1; background: url('http://kevnitserver.com/projects/elegant_builders/exterior2.jpg') center/cover no-repeat; }
         .hero-bg-pattern::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,18,6,0.82) 0%, rgba(10,18,6,0.65) 45%, rgba(10,18,6,0.35) 100%); }
-        .hero-content { position: relative; z-index: 2; }
+        .hero-content { position: relative; z-index: 2; margin-top: 15%; }
         .hero-tag {
           display: inline-flex; align-items: center; gap: 7px;
           background: rgba(95,115,60,0.25); border: 1px solid rgba(95,115,60,0.5);
@@ -645,13 +775,13 @@ const handleNavClick = (link) => {
 
         /* ── Mobile fixes ───────────────────────────────────────── */
         @media(max-width: 400px) {
-          .hero {min-height: 130svh !important;}
-          .highlights-grid { grid-template-columns: 1fr;}
+          .hero {min-height: 110svh !important;}
+          .highlight-cell { padding: 20px 10px}
+          .nav-inner img { height: 35px !important}
         }
-        
         @media(max-width:600px) {
           /* Hero */
-          .hero { padding: 0 24px; align-items: flex-end; padding-bottom: 80px; min-height: 110svh; height: auto; }
+          .hero { padding: 0 24px; align-items: flex-end; padding-bottom: 80px; min-height: 100svh; height: auto; }
           .hero-content { max-width: 100%; }
           .hero-tag { font-size: 9px; padding: 4px 10px; margin-bottom: 16px; }
           .hero-title { font-size: 2.2rem !important; line-height: 1.1; margin-bottom: 10px; }
@@ -775,10 +905,16 @@ const handleNavClick = (link) => {
               </li>
             ))}
           </ul>
-          <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
-            <span /><span /><span />
+          <button className={`hamburger ${menuOpen ? "open" : ""}`}  onClick={() => setMenuOpen(!menuOpen)}>
+            <span></span> <span></span> <span></span>
           </button>
         </div>
+        {menuOpen && (
+          <div
+            className="menu-overlay"
+            onClick={() => setMenuOpen(false)}
+          />
+        )}
         {menuOpen && (
           <div className="mobile-menu">
             {NAV_LINKS.map((l) => (
