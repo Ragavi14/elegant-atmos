@@ -644,9 +644,16 @@ const handleNavClick = (link) => {
         @media(max-width:800px) { .location-grid { grid-template-columns: 1fr !important; } }
 
         /* ── Mobile fixes ───────────────────────────────────────── */
+        @media(max-width: 400px) {
+          .hero {min-height: 130svh !important;}
+          .highlights-grid { grid-template-columns: 1fr;}
+        }
+        @media(max-width: 1300px) {
+          .hero {min-height: 140svh !important;}
+        }
         @media(max-width:600px) {
           /* Hero */
-          .hero { padding: 0 24px; align-items: flex-end; padding-bottom: 80px; min-height: 100svh; }
+          .hero { padding: 0 24px; align-items: flex-end; padding-bottom: 80px; min-height: 110svh; height: auto; }
           .hero-content { max-width: 100%; }
           .hero-tag { font-size: 9px; padding: 4px 10px; margin-bottom: 16px; }
           .hero-title { font-size: 2.2rem !important; line-height: 1.1; margin-bottom: 10px; }
@@ -655,7 +662,7 @@ const handleNavClick = (link) => {
           .hero-stat-num { font-size: 1.1rem !important; }
           .hero-stat-label { font-size: 10px; }
           .hero-scroll { display: none; }
-
+          .nav-inner img{height: 45px !important;}
           /* Contact */
           .contact-card { padding: 28px 20px !important; gap: 32px !important; }
           .contact-form input, .contact-form textarea { padding: 12px 14px; font-size: 13px; }
