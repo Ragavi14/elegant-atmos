@@ -420,8 +420,11 @@ const handleNavClick = (link) => {
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         html { scroll-behavior: smooth; }
         body { font-family: 'DM Sans', DM Sans, sans-serif; background: #fff; color: #1a1a1a; overflow-x: hidden; }
+        html, body {  overflow-x: hidden;  width: 100%;}
+        * {  max-width: 100%;}
         @media (max-width: 600px) {
           body {
+            width: 100%;
             h2{font-size: 25px !important;}
             .hero{
             .btn-outline {width: 100%}
@@ -534,7 +537,7 @@ const handleNavClick = (link) => {
 
         /* Highlights grid */
         .highlights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--charcoal); width: 100%; }
-        @media(max-width:600px) { .green-highlights-banner { grid-template-columns: 1fr !important; } }
+        @media(max-width:600px) { .green-highlights-banner { grid-template-columns: 1fr !important; } .hero-content{padding-top: 50px;}  .highlights-grid{width: 100%} }
         .highlight-cell { background: var(--cream); padding: 44px 32px; text-align: center; transition: background 0.3s; }
         .highlight-cell:hover { background: var(--green); }
         .highlight-cell:hover .hl-num { color: #fff; }
