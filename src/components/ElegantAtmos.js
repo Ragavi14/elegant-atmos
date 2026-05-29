@@ -355,7 +355,7 @@ const handleSubmit = async (e, source = "general") => {
       // 3. Precise File Handling Routing
       if (source === "brochure") {
         window.open(
-          "https://kevnitserver.com/projects/elegant_builders/Elegant_atmos_Brochure.pdf", 
+          "./images/Elegant_atmos_Brochure.pdf", 
           "_blank", 
           "noopener,noreferrer"
         );
