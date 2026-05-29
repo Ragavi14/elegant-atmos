@@ -646,7 +646,7 @@ const handleNavClick = (link) => {
 
         /* Hero */
         .hero { position: relative; height: auto; min-height: 100svh; display: flex; align-items: center; justify-content: flex-start; overflow: hidden; background: linear-gradient(160deg, #0d1a08 0%, #1e2d12 40%, #2d4019 100%); padding: 0 80px; }
-        .hero-bg-pattern { position: absolute; inset: 0; opacity: 1; background: url('http://kevnitserver.com/projects/elegant_builders/exterior2.jpg') center/cover no-repeat; }
+        .hero-bg-pattern { position: absolute; inset: 0; opacity: 1; background: url('../images/atmos-hero.webp') center/cover no-repeat; }
         .hero-bg-pattern::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(10,18,6,0.82) 0%, rgba(10,18,6,0.65) 45%, rgba(10,18,6,0.35) 100%); }
         .hero-content { position: relative; z-index: 2; margin-top: 15%; }
         .hero-tag {
@@ -891,7 +891,7 @@ const handleNavClick = (link) => {
           <div>
           <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 60, objectFit: "contain", }}/>
           <img
-            src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
+            src="../images/elegantatmoslogo.webp"
             alt="Elegant Atmos"
             style={{ height: 60, objectFit: "contain",  marginLeft: '20px', }}
           />
@@ -1635,7 +1635,7 @@ const handleNavClick = (link) => {
       <section className="about-section">
         <div className="container">
           <img
-            src="https://kevnitserver.com/projects/elegant_builders/elegant_builders.png"
+            src="../images/elegant_builders.webp"
             alt="Elegant Builders"
             style={{ height: 60, objectFit: "contain", marginBottom: 32, opacity: 0.9 }}
           />
@@ -1782,7 +1782,7 @@ const handleNavClick = (link) => {
         <div  style={{ height: 48, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} >
           <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
           <img
-            src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png"
+            src="../images/elegantatmoslogo.webp"
             alt="Elegant Atmos"
             style={{ height: 44, objectFit: "contain", marginLeft: '20px', }}
           />
