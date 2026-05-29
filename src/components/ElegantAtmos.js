@@ -889,7 +889,7 @@ const handleNavClick = (link) => {
       <nav style={{ background: navBg, boxShadow: navShadow }}>
         <div className="nav-inner">
           <div>
-          <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 60, objectFit: "contain", }}/>
+          <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 60, objectFit: "contain", }} fetchpriority="high"/>
           <img
             src="../images/elegantatmoslogo.webp"
             alt="Elegant Atmos"
@@ -1780,7 +1780,7 @@ const handleNavClick = (link) => {
       {/* FOOTER */}
       <footer> 
         <div  style={{ height: 48, objectFit: "contain", marginBottom: 20, opacity: 0.9 }} >
-          <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }}/>
+          <img src="../images/elegant_builders.webp" alt="Elegant Logo"  style={{ height: 44, objectFit: "contain", }} fetchpriority="high"/>
           <img
             src="../images/elegantatmoslogo.webp"
             alt="Elegant Atmos"
