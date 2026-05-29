@@ -441,8 +441,10 @@ const handleNavClick = (link) => {
             width: 100%;
             h2{font-size: 25px !important;}
             .hero{
-            .btn-outline {width: 100%}
-            .btn-primary {width: 100%}}
+            .btn-outline {width: 100%; font-size: 13px;}
+            .btn-primary {width: 100%; font-size: 13px;}}
+            .project-overview-section{padding: 0 !important;}
+
           }
         }
         :root {
@@ -775,9 +777,18 @@ const handleNavClick = (link) => {
 
         /* ── Mobile fixes ───────────────────────────────────────── */
         @media(max-width: 400px) {
+        .hero-content{ margin-top: 25% !important;}
+        .leaf-text{ width: 55px}
+        .about-stats{gap: 50px;}
+        .btn-outline { font-size: 12px !important;}
+        .btn-primary { font-size: 12px !important;}
+        .hero-stats { gap: 19px !important;}
+        }
+        @media(max-width: 480px) {
           .hero {min-height: 110svh !important;}
           .highlight-cell { padding: 20px 10px}
           .nav-inner img { height: 35px !important}
+          .builder-recognition-desc{font-size: 14px !important}
         }
         @media(max-width:600px) {
           /* Hero */
@@ -938,7 +949,7 @@ const handleNavClick = (link) => {
               {/* A Whole<br />World of <em>Worth</em> */}
             </h1>
             <p className="hero-tagline">
-             Discover North Bengaluru’s only Freewall homes where your walls—and your views—are yours alone. 136 limited-edition homes <span>starting from ₹1.8 Cr*</span>
+             136 Freewall homes with independent walls and uninterrupted views. <span>starting from ₹1.8 Cr*</span>
             </p>
             <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
               <button className="btn-primary" onClick={() => scrollTo("contact")}>Schedule a Site Visit →</button>
@@ -999,7 +1010,7 @@ const handleNavClick = (link) => {
             fontSize: '15px', 
             lineHeight: '1.6',
             fontFamily: 'DM Sans, DM Sans, sans-serif'
-          }}>
+          }} className="builder-recognition-desc">
             Elegant Builders &amp; Developers has been shaping Bengaluru’s skyline for over two decades with homes built on trust, quality, design and long term value
           </p>
 
@@ -1076,7 +1087,7 @@ const handleNavClick = (link) => {
                   <img src="../images/left.svg" alt=""/>
 
                   {/* Award Center Text */}
-                  <div style={{ fontFamily: 'DM Sans, sans-serif' }}>
+                  <div style={{ fontFamily: 'DM Sans, sans-serif' }} className="leaf-text">
                     <div style={{ fontWeight: 'bold', fontSize: '15px', color: '#111', width: '98px', }}>{award.title}</div>
                     <div style={{ fontSize: '14px', color: '#555', marginTop: '2px' }}>{award.year}</div>
                   </div>
@@ -1411,7 +1422,7 @@ const handleNavClick = (link) => {
           <div style={{ width: "100%", height: "320px", borderRadius: "30px", overflow: "hidden", marginBottom: "-20px", position: "relative", zIndex: "1" }}>
             <iframe
               title="Google Map Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.6728347895475!2d77.5732101!3d13.0881525!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1c8711acbc11%3A0x5c55ad4041a6c3e1!2sMajor%20Sandeep%20Unnikrishnan%20Rd%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1716300000000!5m2!1sen!2sin"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.076571438147!2d77.5611138!3d13.094333599999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae23001fc33733%3A0xbc6b37e9485552f3!2sElegant%20Atmos%20Yelahanka!5e0!3m2!1sen!2sin!4v1780046903364!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
