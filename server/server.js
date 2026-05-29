@@ -93,7 +93,7 @@ app.post("/api/admin/login", async (req, res) => {
    CONTACT FORM API 
 ========================= */
 app.post("/api/contact", async (req, res) => {
-  // console.log("FORM DATA RECEIVED:", req.body);
+  console.log("FORM DATA RECEIVED:", req.body);
 
   // Destructure formType along with your other fields
   const { fullName, phone, email, message, formType } = req.body;
@@ -123,11 +123,11 @@ app.post("/api/contact", async (req, res) => {
       `INSERT INTO leads (full_name, phone, email, message, form_type) VALUES (?, ?, ?, ?, ?)`,
       [fullName.trim(), phone, email, message || "", assignedFormType]
     );
-    // console.log("Step 1: Local DB Insert Success");
+    console.log("Step 1: Local DB Insert Success");
 
     // 2. Authenticate with Salesforce using our updated function
     const tokenData = await getSalesforceAccessToken();
-    // console.log("Step 2: Salesforce Token Acquired");
+    console.log("Step 2: Salesforce Token Acquired");
 
     /* ========================================================
        SPLIT FULL NAME FOR SALESFORCE COMPLIANCE
@@ -158,7 +158,7 @@ app.post("/api/contact", async (req, res) => {
       Description: message || "" 
     };
 
-    // console.log("Step 3: Forwarding Lead to Salesforce...");
+    console.log("Step 3: Forwarding Lead to Salesforce...");
     const salesforceLeadUrl = `${tokenData.instance_url}/services/data/v62.0/sobjects/Lead`;
 
     const sfResponse = await axios.post(salesforceLeadUrl, salesforcePayload, {
@@ -168,7 +168,7 @@ app.post("/api/contact", async (req, res) => {
       }
     });
 
-    // console.log("Salesforce Sync Success! Lead ID:", sfResponse.data.id);
+    console.log("Salesforce Sync Success! Lead ID:", sfResponse.data.id);
 
     return res.status(200).json({
       success: true,
@@ -177,7 +177,7 @@ app.post("/api/contact", async (req, res) => {
     });
 
   } catch (error) {
-    // console.error("CONTACT API FAILURE DETAILS:", error.response?.data || error.message);
+    console.error("CONTACT API FAILURE DETAILS:", error.response?.data || error.message);
 
     return res.status(500).json({
       success: false,
