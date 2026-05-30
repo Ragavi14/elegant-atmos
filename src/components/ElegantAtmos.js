@@ -1367,9 +1367,9 @@ const handleNavClick = (link) => {
               minHeight: "250px"
             }}>
               {/* Replace with your local layout illustration image path if needed */}
-              <div className="why-img-wrap" onClick={() => setLightbox("../images/master-map.png")}>
+              <div className="why-img-wrap" onClick={() => setLightbox("../images/elegant-atmos-route-map.png")}>
               <img 
-                src="../images/map.png" 
+                src="../images/elegant-atmos-route-map.png" 
                 alt="Location Roadmap" 
                 style={{ width: "100%", height: "100%", objectFit: "contain" }}
               />
