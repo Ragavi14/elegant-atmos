@@ -3,18 +3,18 @@ import {useNavigate}  from 'react-router-dom';
 
 const GALLERY = {
   Exterior: [
-    "http://kevnitserver.com/projects/elegant_builders/exterior1.jpg",
-    "http://kevnitserver.com/projects/elegant_builders/exterior2.jpg",
-    "http://kevnitserver.com/projects/elegant_builders/exterior3.jpg",
-    "http://kevnitserver.com/projects/elegant_builders/exterior4.jpg",
+    "../images/gallery/exterior1.webp",
+    "../images/gallery/exterior2.webp",
+    "../images/gallery/exterior3.webp",
+    "../images/gallery/exterior4.webp",
   ],
   Interior: [
-    "http://kevnitserver.com/projects/elegant_builders/interior1.jpg",
-    "http://kevnitserver.com/projects/elegant_builders/interior2.jpg",
-    "http://kevnitserver.com/projects/elegant_builders/interior3.jpg",
-    "http://kevnitserver.com/projects/elegant_builders/interior4.jpg",
+    "../images/gallery/interior1.webp",
+    "../images/gallery/interior2.webp",
+    "../images/gallery/interior3.webp",
+    "../images/gallery/interior4.webp",
   ],
-  "Master Plan": ["http://kevnitserver.com/projects/elegant_builders/masterplan.png"],
+  "Master Plan": ["../images/gallery/masterplan.webp"],
   "Floor Plan": null,
 };
 

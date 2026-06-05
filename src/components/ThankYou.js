@@ -98,7 +98,7 @@ export default function ThankYou() {
           <div style={{ marginBottom: '30px', display: 'flex', justifyContent: 'center' }}>
             <img 
               alt="Elegant Atmos" 
-              src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png" 
+              src="../images/elegantatmoslogo.webp" 
               style={{ 
                 height: '65px', 
                 objectFit: 'contain',

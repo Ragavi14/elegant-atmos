@@ -259,7 +259,7 @@ export default function AdminDashboard({ onLogout }) {
         {/* SIDEBAR */}
         <aside className="dashboard-sidebar">
           <div className="sidebar-branding">
-            <img alt="Elegant Atmos" src="https://kevnitserver.com/projects/elegant_builders/elegantatmoslogo.png" style={{ height: '80px' }}/>
+            <img alt="Elegant Atmos" src="../images/elegantatmoslogo.webp" style={{ height: '80px' }}/>
           </div>
 
           <div className="menu-active">
